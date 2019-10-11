@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import fetch from "isomorphic-unfetch";
 import { parse } from "url";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -17,5 +17,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   res.setHeader("content-type", r.headers.get("content-type"));
   res.setHeader("cache-control", "s-maxage=1, stale-while-revalidate");
+  //@ts-ignore
   r.body.pipe(res);
 };

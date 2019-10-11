@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import fetch from "isomorphic-unfetch";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -28,6 +28,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   for (const block of blocks) {
     const value = block.value;
+    //filter out blocks that are not the current page or a child of the current page.
+    //TODO: this won't work if the children are more than one level deep. Need to build
+    //a better heirarchy for filtering them out
     if (block.value.id !== PAGE_ID && block.value.parent_id !== PAGE_ID)
       continue;
     if (

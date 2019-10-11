@@ -1,8 +1,9 @@
 import React from "react";
 import Head from "next/head";
 import Nav from "../components/nav";
+import fetch from "isomorphic-unfetch";
 
-const Home = () => (
+const Home = ({ posts }) => (
   <div>
     <Head>
       <title>Home</title>
@@ -10,6 +11,8 @@ const Home = () => (
     </Head>
 
     <Nav />
+
+    <div>Number of Posts: {posts ? posts.length : 0}</div>
 
     <div className="hero">
       <h1 className="title">Welcome to Next.js!</h1>
@@ -84,5 +87,16 @@ const Home = () => (
     `}</style>
   </div>
 );
+
+Home.getInitialProps = async ({ req }) => {
+  const baseUrl = process.env.DEV
+    ? "http://localhost:3000"
+    : req
+    ? `https://${req.headers.host}`
+    : "";
+  const res = await fetch(`${baseUrl}/api/getResults`);
+  const json = await res.json();
+  return { posts: json.blockIds };
+};
 
 export default Home;

@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import fetch from "isomorphic-unfetch";
 import { NextApiRequest, NextApiResponse } from "next";
 
 import { getError } from "../../utils";
@@ -23,6 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (r.ok) {
       res.setHeader("content-type", r.headers.get("content-type"));
       res.setHeader("cache-control", "s-maxage=1, stale-while-revalidate");
+      //@ts-ignore
       r.body.pipe(res);
     } else {
       throw new Error(await getError(r));
