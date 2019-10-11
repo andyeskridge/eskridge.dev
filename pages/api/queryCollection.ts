@@ -13,54 +13,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       body: { collectionId, collectionViewId, loader = {}, query = {} }
     } = req;
 
-    const {
-      limit = 70,
-      loadContentCover = true,
-      type = "table",
-      userLocale = "en",
-      userTimeZone = "America/Los_Angeles"
-    } = loader;
-
-    const {
-      aggregate = [
-        {
-          aggregation_type: "count",
-          id: "count",
-          property: "title",
-          type: "title",
-          view_type: "table"
-        }
-      ],
-      filter = [],
-      filter_operator = "and",
-      sort = []
-    } = query;
-
-    const body = {
+    const r = await queryCollection(
       collectionId,
       collectionViewId,
-      loader: {
-        limit,
-        loadContentCover,
-        type,
-        userLocale,
-        userTimeZone
-      },
-      query: {
-        aggregate,
-        filter,
-        filter_operator,
-        sort
-      }
-    };
-
-    const r = await fetch(`https://www.notion.so/api/v3/queryCollection`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify(body)
-    });
+      loader,
+      query
+    );
 
     if (r.ok) {
       res.setHeader("content-type", r.headers.get("content-type"));
@@ -73,3 +31,57 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(405).send({ error: "only POST requests are accepted" });
   }
 };
+
+export async function queryCollection(
+  collectionId: any,
+  collectionViewId: any,
+  loader: any,
+  query: any
+) {
+  const {
+    limit = 70,
+    loadContentCover = true,
+    type = "table",
+    userLocale = "en",
+    userTimeZone = "America/Los_Angeles"
+  } = loader;
+  const {
+    aggregate = [
+      {
+        aggregation_type: "count",
+        id: "count",
+        property: "title",
+        type: "title",
+        view_type: "table"
+      }
+    ],
+    filter = [],
+    filter_operator = "and",
+    sort = []
+  } = query;
+  const body = {
+    collectionId,
+    collectionViewId,
+    loader: {
+      limit,
+      loadContentCover,
+      type,
+      userLocale,
+      userTimeZone
+    },
+    query: {
+      aggregate,
+      filter,
+      filter_operator,
+      sort
+    }
+  };
+  const r = await fetch(`https://www.notion.so/api/v3/queryCollection`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+  return r;
+}
