@@ -39,7 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.setHeader("content-type", r.headers.get("content-type"));
       res.setHeader("cache-control", "s-maxage=1, stale-while-revalidate");
       //@ts-ignore
-      r.body.pipeTo(res);
+      r.body.pipe(res);
     } else {
       throw new Error(await getError(r));
     }
