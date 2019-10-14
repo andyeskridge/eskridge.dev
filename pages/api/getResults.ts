@@ -27,5 +27,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
     }
   }
+  res.setHeader("cache-control", "s-maxage=1, stale-while-revalidate");
   res.json({ blockIds });
 };
