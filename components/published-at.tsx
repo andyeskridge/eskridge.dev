@@ -7,9 +7,7 @@ function PublishedAt({ link, date }: { link: string; date: number }) {
     <>
       <Link href={link}>
         <a href={link} className="u-url">
-          <time className="dt-published">
-            {format(fromUnixTime(date), "MMMM dd, yyyy")}
-          </time>
+          <time className="dt-published">{date}</time>
         </a>
       </Link>
       <style jsx>{`

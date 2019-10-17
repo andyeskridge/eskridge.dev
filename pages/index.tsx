@@ -19,7 +19,7 @@ const Home = ({ posts }) => {
           title={post.value.properties.title[0][0]}
           summary={post.summary}
           date={post.value.last_edited_time}
-          path={post.value.id}
+          path={`post/${post.value.id}`}
         />
       ))}
       <style jsx>{`

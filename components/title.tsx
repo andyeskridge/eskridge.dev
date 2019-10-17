@@ -3,17 +3,12 @@ import { siteMeta } from "../blog.config";
 
 const Title = ({ path }: { path: string }) => (
   <>
-    {path === "/" ? (
-      <h1>
-        <a href={siteMeta.siteUrl}>{siteMeta.title}</a>
-      </h1>
-    ) : (
-      <p>
-        <Link href="/">
-          <a rel="me">{siteMeta.title}</a>
-        </Link>
-      </p>
-    )}
+    <p>
+      <Link href="/">
+        <a rel="me">{siteMeta.title}</a>
+      </Link>
+    </p>
+
     <style jsx>{`
       h1 {
         margin-top: 0;
