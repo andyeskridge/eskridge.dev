@@ -112,7 +112,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       console.log("UNHANDLED", value);
     }
   }
-
+  res.setHeader("cache-control", "s-maxage=1, stale-while-revalidate");
   res.json({ sections, meta });
 };
 
