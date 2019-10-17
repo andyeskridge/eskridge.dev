@@ -31,14 +31,17 @@ const Home = ({ posts }) => {
   );
 };
 
-Home.getInitialProps = async ({ req }) => {
+Home.getInitialProps = async ({ req, res }) => {
   const baseUrl = process.env.DEV
     ? "http://localhost:3000"
     : req
     ? `https://${req.headers.host}`
     : "";
-  const res = await fetch(`${baseUrl}/api/getResults`);
-  const json = await res.json();
+  if (res) {
+    res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
+  }
+  const results = await fetch(`${baseUrl}/api/getResults`);
+  const json = await results.json();
   return { posts: json.blockIds };
 };
 

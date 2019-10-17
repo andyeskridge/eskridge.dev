@@ -70,15 +70,18 @@ function NotionImage({ src }) {
   }
 }
 
-Post.getInitialProps = async ({ req, query }) => {
+Post.getInitialProps = async ({ req, res, query }) => {
   const baseUrl = process.env.DEV
     ? "http://localhost:3000"
     : req
     ? `https://${req.headers.host}`
     : "";
+  if (res) {
+    res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
+  }
   const { id } = query;
-  const res = await fetch(`${baseUrl}/api/getNotionData/${id}`);
-  const { sections, meta } = await res.json();
+  const results = await fetch(`${baseUrl}/api/getNotionData/${id}`);
+  const { sections, meta } = await results.json();
   return { sections, meta };
 };
 
