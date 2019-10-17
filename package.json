@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "DEV=true next dev",
+    "dev": "cross-env DEV=true next dev",
     "build": "next build",
     "start": "next start"
   },
@@ -17,6 +17,7 @@
   "devDependencies": {
     "@types/node": "^12.7.12",
     "@types/react": "^16.9.5",
+    "cross-env": "^6.0.3",
     "typescript": "^3.6.4"
   }
 }
