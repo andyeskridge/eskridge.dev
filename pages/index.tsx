@@ -18,7 +18,7 @@ const Home = ({ posts }) => {
           key={index}
           title={post.value.properties.title[0][0]}
           summary={post.summary}
-          date={post.value.last_edited_time}
+          date={post.value.properties["8Wa~"][0][1][0][1]["start_date"]}
           path={`/post/${post.value.id}`}
         />
       ))}
