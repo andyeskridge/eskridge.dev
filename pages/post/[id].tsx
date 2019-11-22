@@ -1,9 +1,15 @@
 import React from "react";
-import fetch from "isomorphic-unfetch";
-import { useRouter } from "next/router";
 import Layout from "../../components/layouts/blog-post";
+import { fetcher } from "../../utils";
+import useSWR from "swr";
+import { useRouter } from "next/router";
 
-const Post = ({ sections, meta }) => {
+const Post = ({ initialData, query }) => {
+  const router = useRouter();
+  const { data } = useSWR(`/api/getNotionData/${router.query.id}`, fetcher, {
+    initialData
+  });
+  const { sections, meta } = data;
   return (
     <Layout meta={meta}>
       {sections.map((section, i) => {
@@ -23,15 +29,18 @@ const Post = ({ sections, meta }) => {
               )}
             </header>
             <div className="content">
-              {section.children.map(subsection => {
+              {section.children.map((subsection, j) => {
                 return subsection.type === "image" ? (
-                  <span className={`image ${i === 0 ? "fill" : "main"}`}>
+                  <span
+                    key={`subsection-${j}`}
+                    className={`image ${i === 0 ? "fill" : "main"}`}
+                  >
                     <NotionImage src={subsection.src} />
                   </span>
                 ) : subsection.type === "text" ? (
-                  <p>{renderText(subsection.value)}</p>
+                  <p key={`subsection-${j}`}>{renderText(subsection.value)}</p>
                 ) : subsection.type === "list" ? (
-                  <ul>
+                  <ul key={`subsection-${j}`}>
                     {subsection.children.map(child => (
                       <li>{renderText(child)}</li>
                     ))}
@@ -80,9 +89,8 @@ Post.getInitialProps = async ({ req, res, query }) => {
     res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
   }
   const { id } = query;
-  const results = await fetch(`${baseUrl}/api/getNotionData/${id}`);
-  const { sections, meta } = await results.json();
-  return { sections, meta };
+  const results = await fetcher(`${baseUrl}/api/getNotionData/${id}`);
+  return { initialData: results };
 };
 
 export default Post;

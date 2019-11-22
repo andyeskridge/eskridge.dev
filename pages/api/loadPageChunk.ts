@@ -9,31 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(400).send({ error: "no JSON object in the request" });
     }
 
-    const {
-      body: {
-        pageId,
-        limit = 100,
-        cursor = { stack: [] },
-        chunkNumber = 0,
-        verticalColumns = false
-      }
-    } = req;
-
-    const body = {
-      pageId,
-      limit,
-      cursor,
-      chunkNumber,
-      verticalColumns
-    };
-
-    const r = await fetch(`https://www.notion.so/api/v3/loadPageChunk`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify(body)
-    });
+    const r = await loadPageChunk(req.body);
 
     if (r.ok) {
       res.setHeader("content-type", r.headers.get("content-type"));
@@ -47,3 +23,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(405).send({ error: "only POST requests are accepted" });
   }
 };
+
+export async function loadPageChunk({
+  pageId,
+  limit = 100,
+  cursor = { stack: [] },
+  chunkNumber = 0,
+  verticalColumns = false
+}) {
+  const body = {
+    pageId,
+    limit,
+    cursor,
+    chunkNumber,
+    verticalColumns
+  };
+  const r = await fetch(`https://www.notion.so/api/v3/loadPageChunk`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+  return r;
+}

@@ -1,5 +1,6 @@
 import fetch from "isomorphic-unfetch";
 import { NextApiRequest, NextApiResponse } from "next";
+import { loadPageChunk } from "../loadPageChunk";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const baseUrl = process.env.DEV
@@ -12,15 +13,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     query: { PAGE_ID }
   } = req;
 
-  const results = await fetch(`${baseUrl}/api/loadPageChunk`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json"
-    },
-    body: JSON.stringify({ pageId: PAGE_ID })
-  });
+  const results = await loadPageChunk({ pageId: PAGE_ID });
   const data = await results.json();
-  console.log(JSON.stringify(data, null, 2));
   const blocks = values(data.recordMap.block);
 
   const sections = [];

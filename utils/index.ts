@@ -1,3 +1,5 @@
+import fetch from "isomorphic-unfetch";
+
 export async function getError(res) {
   return `Notion API error (${res.status}) \n${getJSONHeaders(
     res
@@ -14,4 +16,9 @@ function getBodyOrNull(res) {
   } catch (err) {
     return null;
   }
+}
+
+export async function fetcher(url: string) {
+  const r = await fetch(url);
+  return await r.json();
 }
