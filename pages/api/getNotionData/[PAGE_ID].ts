@@ -1,6 +1,7 @@
 import fetch from "isomorphic-unfetch";
 import { NextApiRequest, NextApiResponse } from "next";
 import { loadPageChunk } from "../loadPageChunk";
+import { queryCollection } from "../queryCollection";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const baseUrl = process.env.DEV
@@ -66,16 +67,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
       list.children.push(value.properties.title);
     } else if (value.type === "collection_view") {
-      const colRes = await fetch(`${baseUrl}/api/queryCollection`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify({
-          collectionId: value.collection_id,
-          collectionViewId: value.view_ids[0]
-        })
-      });
+      const colRes = await queryCollection(
+        value.collection_id,
+        value.view_ids[0],
+        {},
+        {}
+      );
       const col = await colRes.json();
       const table = {};
       const entries = values(col.recordMap.block).filter(
