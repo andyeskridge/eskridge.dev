@@ -16,8 +16,8 @@
     "swr": "^0.1.12"
   },
   "devDependencies": {
-    "@types/node": "^12.12.11",
-    "@types/react": "^16.9.12",
+    "@types/node": "^12.12.14",
+    "@types/react": "^16.9.14",
     "cross-env": "^6.0.3",
     "typescript": "^3.7.2"
   }
