@@ -61,8 +61,8 @@ const Post = ({ initialData, query }) => {
 };
 
 function renderText(title) {
-  return title.map(chunk => {
-    let wrapper = <span>{chunk[0]}</span>;
+  return title.map((chunk, i) => {
+    let wrapper = <span key={i}>{chunk[0]}</span>;
     (chunk[1] || []).forEach(el => {
       wrapper = React.createElement(el[0], {}, wrapper);
     });
