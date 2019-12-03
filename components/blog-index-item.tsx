@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PublishedAt from "./published-at";
 
-const Post = ({ title, summary, date, path }) => (
+export default ({ title, summary, date, path }) => (
   <article>
     <header>
       <h2>
@@ -28,5 +28,3 @@ const Post = ({ title, summary, date, path }) => (
     `}</style>
   </article>
 );
-
-export default Post;

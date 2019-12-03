@@ -1,4 +1,4 @@
-const Container = ({ children }) => (
+export default ({ children }) => (
   <>
     <div>{children}</div>
     <style jsx>{`
@@ -10,5 +10,3 @@ const Container = ({ children }) => (
     `}</style>
   </>
 );
-
-export default Container;

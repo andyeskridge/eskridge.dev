@@ -1,9 +1,9 @@
 import Profile from "./profile";
 
-function Footer() {
+export default () => {
   return (
     <footer>
-      <Profile className="profile-footer" />
+      <Profile />
 
       <p>
         Proudly built with <a href="https://nextjs.org">Next.js</a> -{" "}
@@ -20,6 +20,4 @@ function Footer() {
       `}</style>
     </footer>
   );
-}
-
-export default Footer;
+};

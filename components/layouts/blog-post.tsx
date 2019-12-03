@@ -1,12 +1,12 @@
 import Layout from "./default";
 import SyntaxHighlight from "../syntax-highlight";
 
-function BlogPost({ meta, children }) {
+export default ({ meta, children }) => {
   return (
     <Layout pageTitle={meta.title} ogImage={meta.image}>
       <SyntaxHighlight />
-      <article className="h-entry">
-        <div className="e-content">{children}</div>
+      <article>
+        <div>{children}</div>
       </article>
       <style jsx>{`
         article {
@@ -15,6 +15,4 @@ function BlogPost({ meta, children }) {
       `}</style>
     </Layout>
   );
-}
-
-export default BlogPost;
+};

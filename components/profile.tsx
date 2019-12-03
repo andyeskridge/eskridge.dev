@@ -1,9 +1,8 @@
 import { siteMeta } from "../blog.config";
 
-const Profile = (_props: any) => (
-  <div className="h-card profile">
+export default () => (
+  <div className="profile">
     <img
-      className="u-photo"
       src="https://secure.gravatar.com/avatar/b45bac1be8f44eace03ebb95145f93b4"
       alt={siteMeta.author}
     />
@@ -11,13 +10,12 @@ const Profile = (_props: any) => (
     <div>
       <p>
         Hi, I'm{" "}
-        <a className="u-url p-name" href={siteMeta.siteUrl} rel="me">
+        <a href={siteMeta.siteUrl} rel="me">
           {siteMeta.author}
         </a>
       </p>
-      <p className="p-note">
-        I'm an experienced development manager. Currently managing development
-        efforts at Cenergistic.
+      <p>
+        {`I'm an experienced development manager. Currently managing development efforts at Cenergistic.`}
       </p>
     </div>
     <style jsx>{`
@@ -29,8 +27,8 @@ const Profile = (_props: any) => (
       }
 
       img {
-        width: 5em;
-        height: 5em;
+        width: 75px;
+        height: 75px;
         margin-right: 0.5em;
       }
 
@@ -40,5 +38,3 @@ const Profile = (_props: any) => (
     `}</style>
   </div>
 );
-
-export default Profile;

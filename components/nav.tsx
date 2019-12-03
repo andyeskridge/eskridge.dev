@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Nav = () => (
+export default () => (
   <nav>
     <Link href="/about">
       <a>About</a>
@@ -16,5 +16,3 @@ const Nav = () => (
     `}</style>
   </nav>
 );
-
-export default Nav;

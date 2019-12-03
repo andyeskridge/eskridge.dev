@@ -2,12 +2,12 @@ import React from "react";
 import Link from "next/link";
 import { parse, format } from "date-fns";
 
-function PublishedAt({ link, date }: { link: string; date: string }) {
+export default ({ link, date }: { link: string; date: string }) => {
   return (
     <>
       <Link href={link}>
-        <a href={link} className="u-url">
-          <time className="dt-published">
+        <a href={link}>
+          <time>
             {format(parse(date, "yyyy-MM-dd", Date.now()), "MMMM dd, yyyy")}
           </time>
         </a>
@@ -20,6 +20,4 @@ function PublishedAt({ link, date }: { link: string; date: string }) {
       `}</style>
     </>
   );
-}
-
-export default PublishedAt;
+};

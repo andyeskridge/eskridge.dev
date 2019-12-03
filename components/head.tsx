@@ -6,7 +6,7 @@ const defaultDescription = siteMeta.description;
 const defaultOGURL = siteMeta.siteUrl;
 const defaultOGImage = siteMeta.image;
 
-const Head = ({
+export default ({
   title = undefined,
   description = defaultDescription,
   url = defaultOGURL,
@@ -42,5 +42,3 @@ const Head = ({
     <meta property="og:image:height" content="630" />
   </NextHead>
 );
-
-export default Head;

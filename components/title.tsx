@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { siteMeta } from "../blog.config";
 
-const Title = ({ path }: { path: string }) => (
+export default () => (
   <>
     <p>
       <Link href="/">
@@ -26,5 +26,3 @@ const Title = ({ path }: { path: string }) => (
     `}</style>
   </>
 );
-
-export default Title;

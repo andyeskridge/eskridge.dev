@@ -3,21 +3,19 @@ import Head from "./head";
 import Nav from "./nav";
 import Title from "./title";
 
-function Header({
-  path,
+export default ({
   pageTitle,
   ogImage
 }: {
-  path: string;
   pageTitle: string;
   ogImage: string;
-}) {
+}) => {
   return (
     <>
       <Head title={pageTitle} ogImage={ogImage} />
 
       <header>
-        <Title path={path} />
+        <Title />
         <Nav />
       </header>
       <style jsx>{`
@@ -136,6 +134,4 @@ function Header({
       `}</style>
     </>
   );
-}
-
-export default Header;
+};

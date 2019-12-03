@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
 import Layout from "../components/layouts/default";
 import Post from "../components/blog-index-item";
 import { fetcher } from "../utils";
@@ -7,14 +6,12 @@ import useSWR from "swr";
 import { GetResultsType } from "./api/getResults";
 
 const Home = ({ initialData }: { initialData: GetResultsType }) => {
-  const router = useRouter();
-
   const { data } = useSWR<GetResultsType, any>("/api/getResults", fetcher, {
     initialData
   });
 
   return (
-    <Layout pageTitle="Blog" path={router.pathname}>
+    <Layout pageTitle="Blog">
       <header>
         <h1>Blog</h1>
       </header>
