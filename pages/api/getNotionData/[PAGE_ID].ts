@@ -57,6 +57,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           value: value.properties.title
         });
       }
+    } else if (value.type === "code") {
+      list = null;
+      if (value.properties) {
+        section.children.push({
+          type: "code",
+          value: value.properties.title,
+          lang: value.properties.language
+        });
+      }
     } else if (value.type === "bulleted_list") {
       if (list == null) {
         list = {

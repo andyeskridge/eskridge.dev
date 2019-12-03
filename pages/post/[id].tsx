@@ -4,7 +4,7 @@ import { fetcher } from "../../utils";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 
-const Post = ({ initialData, query }) => {
+const Post = ({ initialData }) => {
   const router = useRouter();
   const { data } = useSWR(`/api/getNotionData/${router.query.id}`, fetcher, {
     initialData
@@ -45,17 +45,16 @@ const Post = ({ initialData, query }) => {
                       <li>{renderText(child)}</li>
                     ))}
                   </ul>
+                ) : subsection.type === "code" ? (
+                  <code key={`subsection-${j}`}>
+                    {renderText(subsection.value)}
+                  </code>
                 ) : null;
               })}
             </div>
           </section>
         );
       })}
-      <style jsx>{`
-        header {
-          margin-bottom: 3em;
-        }
-      `}</style>
     </Layout>
   );
 };
