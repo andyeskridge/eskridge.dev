@@ -7,9 +7,8 @@ import { GetPageType } from "../api/getNotionData/[PAGE_ID]";
 
 const Post = ({ initialData }: { initialData: GetPageType }) => {
   const router = useRouter();
-  const { data } = useSWR<GetPageType, any>(
+  const { data } = useSWR<GetPageType>(
     `/api/getNotionData/${router.query.id}`,
-    fetcher,
     {
       initialData
     }

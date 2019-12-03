@@ -6,7 +6,7 @@ import useSWR from "swr";
 import { GetResultsType } from "./api/getResults";
 
 const Home = ({ initialData }: { initialData: GetResultsType }) => {
-  const { data } = useSWR<GetResultsType, any>("/api/getResults", fetcher, {
+  const { data } = useSWR<GetResultsType>("/api/getResults", {
     initialData
   });
 
