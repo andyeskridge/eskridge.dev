@@ -1,7 +1,17 @@
 import Link from "next/link";
 import PublishedAt from "./published-at";
 
-export default ({ title, summary, date, path }) => (
+export default ({
+  title,
+  summary,
+  date,
+  path
+}: {
+  title: string;
+  summary: string;
+  date: string;
+  path: string;
+}) => (
   <article>
     <header>
       <h2>
@@ -10,7 +20,7 @@ export default ({ title, summary, date, path }) => (
         </Link>
       </h2>
 
-      <PublishedAt link={path} date={date} />
+      <PublishedAt date={date} />
     </header>
     <div className="post-summary">{summary}</div>
     <style jsx>{`
