@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (r.ok) {
       res.setHeader("content-type", r.headers.get("content-type"));
-      res.setHeader("cache-control", "s-maxage=1, stale-while-revalidate");
+      res.setHeader("cache-control", "s-maxage=60, stale-while-revalidate");
       //@ts-ignore
       r.body.pipe(res);
     } else {

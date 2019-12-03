@@ -87,7 +87,7 @@ Post.getInitialProps = async ({ req, res, query }) => {
     ? `https://${req.headers.host}`
     : "";
 
-  res?.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
+  res?.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate");
 
   const { id } = query;
   const results: GetPageType = await fetcher(
