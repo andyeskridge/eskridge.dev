@@ -3,12 +3,17 @@ import Layout from "../../components/layouts/blog-post";
 import { fetcher } from "../../utils";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import { GetPageType } from "../api/getNotionData/[PAGE_ID]";
 
-const Post = ({ initialData }) => {
+const Post = ({ initialData }: { initialData: GetPageType }) => {
   const router = useRouter();
-  const { data } = useSWR(`/api/getNotionData/${router.query.id}`, fetcher, {
-    initialData
-  });
+  const { data } = useSWR<GetPageType, any>(
+    `/api/getNotionData/${router.query.id}`,
+    fetcher,
+    {
+      initialData
+    }
+  );
   const { sections, meta } = data;
   return (
     <Layout meta={meta}>
@@ -88,7 +93,9 @@ Post.getInitialProps = async ({ req, res, query }) => {
     res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
   }
   const { id } = query;
-  const results = await fetcher(`${baseUrl}/api/getNotionData/${id}`);
+  const results: GetPageType = await fetcher(
+    `${baseUrl}/api/getNotionData/${id}`
+  );
   return { initialData: results };
 };
 

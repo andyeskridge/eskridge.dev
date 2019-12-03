@@ -3,6 +3,22 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { loadPageChunk } from "../loadPageChunk";
 import { queryCollection } from "../queryCollection";
 
+type Block = {
+  title: [[string]];
+  children: {
+    type: "text" | "code" | "image" | "list";
+    value: [[string]];
+    lang?: [[string]];
+    src?: [[string]];
+    children?: string[];
+  }[];
+};
+
+export type GetPageType = {
+  sections: Block[];
+  meta: {};
+};
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const baseUrl = process.env.DEV
     ? "http://localhost:3000"

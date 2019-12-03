@@ -16,7 +16,8 @@ const Profile = (_props: any) => (
         </a>
       </p>
       <p className="p-note">
-        I'm a frontend developer &amp; web standards enthusiastic.
+        I'm an experienced development manager. Currently managing development
+        efforts at Cenergistic.
       </p>
     </div>
     <style jsx>{`
