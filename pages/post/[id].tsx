@@ -25,9 +25,7 @@ const Post = ({ initialData }: { initialData: GetPageType }) => {
           >
             <header>
               {i === 0 ? (
-                <>
-                  <h1>{renderText(section.title)}</h1>
-                </>
+                <h1>{renderText(section.title)}</h1>
               ) : (
                 <h2>{renderText(section.title)}</h2>
               )}
@@ -88,9 +86,9 @@ Post.getInitialProps = async ({ req, res, query }) => {
     : req
     ? `https://${req.headers.host}`
     : "";
-  if (res) {
-    res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
-  }
+
+  res?.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
+
   const { id } = query;
   const results: GetPageType = await fetcher(
     `${baseUrl}/api/getNotionData/${id}`

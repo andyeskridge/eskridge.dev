@@ -40,9 +40,9 @@ Home.getInitialProps = async ({ req, res }) => {
     : req
     ? `https://${req.headers.host}`
     : "";
-  if (res) {
-    res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
-  }
+
+  res?.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
+
   const results: GetResultsType = await fetcher(`${baseUrl}/api/getResults`);
   return { initialData: results };
 };
