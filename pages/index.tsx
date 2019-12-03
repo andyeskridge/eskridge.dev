@@ -4,11 +4,12 @@ import Layout from "../components/layouts/default";
 import Post from "../components/blog-index-item";
 import { fetcher } from "../utils";
 import useSWR from "swr";
+import { GetResultsType } from "./api/getResults";
 
-const Home = ({ initialData }) => {
+const Home = ({ initialData }: { initialData: GetResultsType }) => {
   const router = useRouter();
 
-  const { data } = useSWR("/api/getResults", fetcher, {
+  const { data } = useSWR<GetResultsType, any>("/api/getResults", fetcher, {
     initialData
   });
 
@@ -22,7 +23,7 @@ const Home = ({ initialData }) => {
         <Post
           key={index}
           title={post.value.properties.title[0][0]}
-          summary={post.summary}
+          summary={post.value.properties["ct`>"]?.[0]?.[0]}
           date={post.value.properties["8Wa~"][0][1][0][1]["start_date"]}
           path={`/post/${post.value.id}`}
         />
@@ -45,7 +46,7 @@ Home.getInitialProps = async ({ req, res }) => {
   if (res) {
     res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
   }
-  const results = await fetcher(`${baseUrl}/api/getResults`);
+  const results: GetResultsType = await fetcher(`${baseUrl}/api/getResults`);
   return { initialData: results };
 };
 

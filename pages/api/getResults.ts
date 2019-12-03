@@ -1,6 +1,35 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { queryCollection } from "./queryCollection";
 
+export type GetResultsType = {
+  blockIds: {
+    role: "reader";
+    value: {
+      id: string;
+      version: number;
+      type: "page";
+      properties: {
+        "8Wa~": [["‣", [["d", { type: "date"; start_date: string }]]]];
+        title: [[string]];
+        "ct`>"?: [[string]];
+        [key: string]: any;
+      };
+      content: string[];
+      created_by: string;
+      created_time: number;
+      last_edited_by: string;
+      last_edited_time: number;
+      parent_id: string;
+      parent_table: "collection";
+      alive: boolean;
+      created_by_table: "notion_user";
+      created_by_id: string;
+      last_edited_by_table: "notion_user";
+      last_edited_by_id: string;
+    };
+  }[];
+};
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     body: {
