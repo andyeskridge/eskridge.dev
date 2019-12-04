@@ -22,7 +22,7 @@ export default ({
 
       <PublishedAt date={date} />
     </header>
-    <div className="post-summary">{summary}</div>
+    <p>{summary}</p>
     <style jsx>{`
       article {
         margin-bottom: 2em;
@@ -30,10 +30,6 @@ export default ({
 
       a {
         text-decoration: none;
-      }
-
-      .post-summary {
-        margin-top: 1em;
       }
     `}</style>
   </article>

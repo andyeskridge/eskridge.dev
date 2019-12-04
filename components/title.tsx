@@ -15,7 +15,7 @@ export default () => (
       }
 
       a {
-        color: #333;
+        color: #bb86fc;
         text-decoration: none;
       }
 

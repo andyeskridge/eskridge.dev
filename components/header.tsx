@@ -43,16 +43,16 @@ export default ({
           font-size: 18px;
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
             Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-          color: #333;
+          color: hsla(0, 0%, 100%, 0.88);
           line-height: 1.5;
-          background-color: #fff;
+          background-color: #1f1f1f;
         }
 
         h1,
         h2,
         h3,
         h4 {
-          margin-bottom: 0.5rem;
+          margin-bottom: 0;
           font-weight: bold;
           color: inherit;
           line-height: 1.25;
@@ -85,7 +85,7 @@ export default ({
         }
 
         a {
-          color: #33e;
+          color: #03dac6;
           cursor: pointer;
         }
 

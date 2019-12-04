@@ -23,7 +23,7 @@ export default () => (
         display: flex;
         align-items: center;
         padding: 1em;
-        background-color: #eee;
+        background-color: #2c2c2c;
       }
 
       img {

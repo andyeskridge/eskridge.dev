@@ -12,10 +12,6 @@ const Home = ({ initialData }: { initialData: GetResultsType }) => {
 
   return (
     <Layout pageTitle="Blog">
-      <header>
-        <h1>Blog</h1>
-      </header>
-
       {data.blockIds.map((post, index) => (
         <Post
           key={index}
