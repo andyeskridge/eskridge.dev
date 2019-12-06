@@ -34,7 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     body: {
       collectionId = "c04ef1f8-2617-4248-bfec-f495db357b0f",
-      collectionViewId = "3ecee699-c9ca-45cc-a79a-7a376df75e3a",
+      collectionViewId = "27271deb-b714-4373-a4be-7ac73c5670ec",
       loader = {},
       query = {}
     }

@@ -12,7 +12,7 @@ const Home = ({ initialData }: { initialData: GetResultsType }) => {
 
   return (
     <Layout pageTitle="Blog">
-      {data.blockIds.map((post, index) => (
+      {data?.blockIds.map((post, index) => (
         <Post
           key={index}
           title={post.value.properties.title[0][0]}
