@@ -7,8 +7,8 @@ export default ({
   pageTitle,
   ogImage
 }: {
-  pageTitle: string;
-  ogImage: string;
+  pageTitle: string | undefined;
+  ogImage: string | undefined;
 }) => {
   return (
     <>

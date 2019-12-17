@@ -1,6 +1,13 @@
+import React from "react";
 import Layout from "./default";
 
-export default ({ meta, children }) => {
+export default ({
+  meta,
+  children
+}: {
+  meta: { title: string };
+  children: React.ReactNode;
+}) => {
   return (
     <Layout pageTitle={meta.title}>
       <article>

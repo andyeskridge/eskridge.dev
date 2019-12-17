@@ -4,6 +4,7 @@ import Post from "../components/blog-index-item";
 import { fetcher } from "../utils";
 import useSWR from "swr";
 import { GetResultsType } from "./api/getResults";
+import { NextApiRequest, NextApiResponse } from "next";
 
 const Home = ({ initialData }: { initialData: GetResultsType }) => {
   const { data } = useSWR<GetResultsType>("/api/getResults", {
@@ -30,7 +31,13 @@ const Home = ({ initialData }: { initialData: GetResultsType }) => {
   );
 };
 
-Home.getInitialProps = async ({ req, res }) => {
+Home.getInitialProps = async ({
+  req,
+  res
+}: {
+  req: NextApiRequest;
+  res: NextApiResponse;
+}) => {
   const baseUrl = process.env.DEV
     ? "http://localhost:3000"
     : req

@@ -1,16 +1,17 @@
 import fetch from "isomorphic-unfetch";
+import { NextApiResponse } from "next";
 
-export async function getError(res) {
+export async function getError(res: Response) {
   return `Notion API error (${res.status}) \n${getJSONHeaders(
     res
   )}\n ${await getBodyOrNull(res)}`;
 }
 
-function getJSONHeaders(res) {
-  return JSON.stringify(res.headers.raw());
+function getJSONHeaders(res: Response) {
+  return JSON.stringify(res.headers);
 }
 
-function getBodyOrNull(res) {
+function getBodyOrNull(res: Response) {
   try {
     return res.text();
   } catch (err) {

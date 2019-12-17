@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const r = await loadPageChunk(req.body);
 
     if (r.ok) {
-      res.setHeader("content-type", r.headers.get("content-type"));
+      res.setHeader("content-type", r.headers.get("content-type") ?? "");
       res.setHeader("cache-control", "s-maxage=60, stale-while-revalidate");
       //@ts-ignore
       r.body.pipe(res);
@@ -25,7 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export async function loadPageChunk({
-  pageId,
+  pageId = "",
   limit = 100,
   cursor = { stack: [] },
   chunkNumber = 0,

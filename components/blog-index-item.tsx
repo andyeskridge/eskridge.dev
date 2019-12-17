@@ -8,7 +8,7 @@ export default ({
   path
 }: {
   title: string;
-  summary: string;
+  summary?: string;
   date: string;
   path: string;
 }) => (

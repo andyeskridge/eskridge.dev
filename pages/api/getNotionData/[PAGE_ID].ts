@@ -16,7 +16,7 @@ type Block = {
 
 export type GetPageType = {
   sections: Block[];
-  meta: {};
+  meta: { title: string; image: string };
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -30,11 +30,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     query: { PAGE_ID }
   } = req;
 
+  if (Array.isArray(PAGE_ID)) {
+    throw new Error(`Sent an array of page ids`);
+  }
+
   const results = await loadPageChunk({ pageId: PAGE_ID });
   const data = await results.json();
   const blocks = values(data.recordMap.block);
 
-  const sections = [];
+  const sections: {
+    title: string;
+    children: {
+      title?: string;
+      type?: string;
+      src?: string;
+      value?: string | { [key: string]: string };
+      lang?: string;
+    }[];
+  }[] = [];
   let meta = {};
 
   for (const block of blocks) {
@@ -54,7 +67,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const section = sections[sections.length - 1];
-    let list = null;
+    let list: {
+      type: "list";
+      children: string[];
+    } | null = null;
 
     if (value.type === "image") {
       list = null;
@@ -99,7 +115,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         {}
       );
       const col = await colRes.json();
-      const table = {};
+      const table: { [key: string]: string } = {};
       const entries = values(col.recordMap.block).filter(
         block => block.value && block.value.parent_id === value.collection_id
       );
@@ -132,7 +148,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.json({ sections, meta });
 };
 
-function values(obj) {
+function values(obj: { [x: string]: any }) {
   const vals = [];
   for (const key in obj) {
     vals.push(obj[key]);
