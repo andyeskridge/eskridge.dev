@@ -10,17 +10,17 @@
   "dependencies": {
     "date-fns": "^2.8.1",
     "isomorphic-unfetch": "^3.0.0",
-    "next": "9.1.5",
+    "next": "9.1.6",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "swr": "0.1.12"
+    "swr": "0.1.16"
   },
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
     "@babel/plugin-proposal-optional-chaining": "^7.7.5",
-    "@types/node": "^12.12.17",
-    "@types/react": "^16.9.16",
+    "@types/node": "^13.1.2",
+    "@types/react": "^16.9.17",
     "cross-env": "^6.0.3",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.4"
   }
 }
