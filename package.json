@@ -1,26 +1,32 @@
 {
-  "name": "eskridge.dev",
+  "name": "notion-blog",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
-    "dev": "cross-env DEV=true next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build && node .next/serverless/scripts/build-rss.js",
+    "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "dependencies": {
-    "date-fns": "^2.8.1",
-    "isomorphic-unfetch": "^3.0.0",
-    "next": "9.1.6",
+    "@zeit/react-jsx-parser": "^2.0.0",
+    "github-slugger": "^1.2.1",
+    "next": "^9.2.2-canary.3",
+    "prismjs": "^1.17.1",
     "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "swr": "0.1.16"
+    "react-dom": "16.12.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
-    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@types/node": "^13.1.2",
+    "@types/prismjs": "^1.16.0",
     "@types/react": "^16.9.17",
-    "cross-env": "^6.0.3",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
     "typescript": "^3.7.4"
   }
 }
