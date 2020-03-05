@@ -46,7 +46,9 @@ export async function unstable_getStaticProps({
 // Return our list of blog posts to prerender
 export async function unstable_getStaticPaths() {
   const postsTable = await getBlogIndex()
-  const paths = Object.keys(postsTable).map(slug => getBlogLink(slug))
+  const paths = Object.keys(postsTable).map(slug => {
+    return { params: { slug } }
+  })
   return { paths }
 }
 
@@ -73,6 +75,9 @@ const RenderPost = ({ post, redirect }) => {
         </Head>
       </>
     )
+  }
+  if (!post) {
+    return null
   }
 
   return (
