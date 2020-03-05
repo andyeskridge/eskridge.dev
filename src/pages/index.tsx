@@ -1,9 +1,6 @@
 import Link from 'next/link'
 import Header from '../components/header'
 
-import blogStyles from '../styles/blog.module.css'
-import sharedStyles from '../styles/shared.module.css'
-
 import { getBlogLink, getDateStr, postIsReady } from '../lib/blog-helpers'
 import { textBlock } from '../lib/notion/renderers'
 import getNotionUsers from '../lib/notion/getNotionUsers'
@@ -46,26 +43,25 @@ export default ({ posts = [] }) => {
   return (
     <>
       <Header titlePre="Blog" />
-      <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
-        <h1>My Notion Blog</h1>
+      <div className="px-4 py-0">
         {posts.length === 0 && (
-          <p className={blogStyles.noPosts}>There are no posts yet</p>
+          <p className="text-center">There are no posts yet</p>
         )}
         {posts.map(post => {
           return (
-            <div className={blogStyles.postPreview} key={post.Slug}>
-              <h3>
+            <div className="max-w-screen-sm mx-auto my-3" key={post.Slug}>
+              <h3 className="text-3xl font-bold text-blue-400">
                 <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
                   <a>{post.Page}</a>
                 </Link>
               </h3>
               {post.Authors.length > 0 && (
-                <div className="authors">By: {post.Authors.join(' ')}</div>
+                <div className="text-sm">By: {post.Authors.join(' ')}</div>
               )}
               {post.Date && (
-                <div className="posted">Posted: {getDateStr(post.Date)}</div>
+                <div className="text-sm">Posted: {getDateStr(post.Date)}</div>
               )}
-              <p>
+              <p className="mt-3">
                 {(!post.preview || post.preview.length === 0) &&
                   'No preview available'}
                 {(post.preview || []).map((block, idx) =>

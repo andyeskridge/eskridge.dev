@@ -1,9 +1,6 @@
 import Header from '../components/header'
 import ExtLink from '../components/ext-link'
 
-import sharedStyles from '../styles/shared.module.css'
-import contactStyles from '../styles/contact.module.css'
-
 import GitHub from '../components/svgs/github'
 import Twitter from '../components/svgs/twitter'
 import Envelope from '../components/svgs/envelope'
@@ -28,29 +25,32 @@ const contacts = [
   {
     Comp: Envelope,
     alt: 'envelope icon',
-    link: 'mailto:jj@jjsweb.site?subject=Notion Blog',
+    link: 'mailto:andy@eskridge.dev',
   },
 ]
 
 export default () => (
   <>
     <Header titlePre="Contact" />
-    <div className={sharedStyles.layout}>
-      <div className={contactStyles.avatar}>
-        <img src="/avatar.png" alt="avatar with letters JJ" height={60} />
+    <div>
+      <h1 className="text-4xl font-extrabold tracking-tighter text-center">
+        Contact
+      </h1>
+
+      <div className="text-center text-lg">
+        Andy Eskridge - Director of Software Development @{' '}
+        <ExtLink href="https://cenergistic.com">Cenergistic</ExtLink>
       </div>
 
-      <h1 style={{ marginTop: 0 }}>Contact</h1>
-
-      <div className={contactStyles.name}>
-        JJ Kasper - Next.js Engineer @{' '}
-        <ExtLink href="https://zeit.co">ZEIT</ExtLink>
-      </div>
-
-      <div className={contactStyles.links}>
+      <div className="text-center block mx-auto my-4">
         {contacts.map(({ Comp, link, alt }) => {
           return (
-            <ExtLink key={link} href={link} aria-label={alt}>
+            <ExtLink
+              className="w-4 h-4 inline-block mx-12 fill-current"
+              key={link}
+              href={link}
+              aria-label={alt}
+            >
               <Comp height={32} />
             </ExtLink>
           )

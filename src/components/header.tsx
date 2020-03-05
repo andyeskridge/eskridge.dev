@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Head from 'next/head'
 import ExtLink from './ext-link'
 import { useRouter } from 'next/router'
-import styles from '../styles/header.module.css'
 
 const navItems: { label: string; page?: string; link?: string }[] = [
   { label: 'Home', page: '/' },
@@ -15,7 +14,7 @@ export default ({ titlePre = '' }) => {
   const { pathname } = useRouter()
 
   return (
-    <header className={styles.header}>
+    <header className="block min-h-full p-8 text-center tracking-tighter">
       <Head>
         <title>{titlePre ? `${titlePre} |` : ''} My Notion Blog</title>
         <meta
@@ -30,10 +29,16 @@ export default ({ titlePre = '' }) => {
       </Head>
       <ul>
         {navItems.map(({ label, page, link }) => (
-          <li key={label}>
+          <li className="inline-block p-2" key={label}>
             {page ? (
               <Link href={page}>
-                <a className={pathname === page ? 'active' : undefined}>
+                <a
+                  className={`text-xl ${
+                    pathname === page
+                      ? 'font-semibold text-blue-600'
+                      : 'font-normal text-gray-500'
+                  }`}
+                >
                   {label}
                 </a>
               </Link>

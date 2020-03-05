@@ -4,7 +4,6 @@ import Header from '../../components/header'
 import Heading from '../../components/heading'
 import components from '../../components/dynamic'
 import ReactJSXParser from '@zeit/react-jsx-parser'
-import blogStyles from '../../styles/blog.module.css'
 import { textBlock } from '../../lib/notion/renderers'
 import getPageData from '../../lib/notion/getPageData'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
@@ -78,16 +77,18 @@ const RenderPost = ({ post, redirect }) => {
   return (
     <>
       <Header titlePre={post.Page} />
-      <div className={blogStyles.post}>
-        <h1>{post.Page || ''}</h1>
+      <div className="max-w-screen-sm mx-auto my-0">
+        <h1 className="text-3xl font-bold text-blue-400 mx-0">
+          {post.Page || ''}
+        </h1>
         {post.Authors.length > 0 && (
-          <div className="authors">By: {post.Authors.join(' ')}</div>
+          <div className="text-sm">By: {post.Authors.join(' ')}</div>
         )}
         {post.Date && (
-          <div className="posted">Posted: {getDateStr(post.Date)}</div>
+          <div className="text-sm">Posted: {getDateStr(post.Date)}</div>
         )}
 
-        <hr />
+        <hr className="my-4" />
 
         {(!post.content || post.content.length === 0) && (
           <p>This post has no content</p>
@@ -193,6 +194,7 @@ const RenderPost = ({ post, redirect }) => {
                   muted={!isImage}
                   autoPlay={!isImage}
                   style={{ width }}
+                  className="mx-8 my-auto shadow-md max-w-full block"
                 />
               )
               break
