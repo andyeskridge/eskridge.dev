@@ -46,7 +46,8 @@ export async function unstable_getStaticProps({
 // Return our list of blog posts to prerender
 export async function unstable_getStaticPaths() {
   const postsTable = await getBlogIndex()
-  return Object.keys(postsTable).map(slug => getBlogLink(slug))
+  const paths = Object.keys(postsTable).map(slug => getBlogLink(slug))
+  return { paths }
 }
 
 const listTypes = new Set(['bulleted_list', 'numbered_list'])
