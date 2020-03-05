@@ -1,0 +1,61 @@
+.blogIndex {
+  padding: 0 5%;
+}
+
+.blogIndex h1 {
+  margin-bottom: 50px;
+}
+
+.noPosts {
+  text-align: center;
+}
+
+.postPreview {
+  max-width: 600px;
+  margin: 10px auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.postPreview:last-child {
+  border-bottom: none;
+}
+
+.postPreview h3,
+.post h1 {
+  margin-bottom: 0;
+}
+
+.post h1 {
+  margin-top: 0;
+}
+
+.post :global(h2),
+.post :global(h3) {
+  margin: 3rem 0 1.5rem 0;
+}
+
+.post :global(video),
+.post :global(img) {
+  margin: 2rem auto;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+  display: block;
+}
+
+.postPreview :global(.posted) {
+  margin-bottom: 0.5em;
+}
+
+.post {
+  max-width: calc(600px + 10%);
+  margin: 0 auto;
+  padding: 5%;
+}
+
+.post :global(hr) {
+  margin-bottom: 2em;
+}
+
+.post :global(a + p) {
+  margin-top: 0;
+}
