@@ -49,7 +49,7 @@ export async function unstable_getStaticPaths() {
   const paths = Object.keys(postsTable).map(slug => {
     return { params: { slug } }
   })
-  return { paths, fallback: false }
+  return { paths }
 }
 
 const listTypes = new Set(['bulleted_list', 'numbered_list'])
