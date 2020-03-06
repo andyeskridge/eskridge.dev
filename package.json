@@ -1,5 +1,5 @@
 {
-  "name": "notion-blog",
+  "name": "eskridge.dev",
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
@@ -7,30 +7,23 @@
     "build": "next build && node .next/serverless/scripts/build-rss.js",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "dependencies": {
     "@zeit/react-jsx-parser": "^2.0.0",
-    "autoprefixer": "^9.7.4",
     "github-slugger": "^1.3.0",
     "next": "^9.2.2",
-    "postcss-import": "^12.0.1",
     "prismjs": "^1.19.0",
     "react": "16.13.0",
-    "react-dom": "16.13.0",
-    "tailwindcss": "^1.2.0"
+    "react-dom": "16.13.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
     "@types/node": "^13.7.7",
     "@types/prismjs": "^1.16.0",
     "@types/react": "^16.9.23",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.8",
+    "autoprefixer": "^9.7.4",
+    "postcss-import": "^12.0.1",
     "prettier": "^1.19.1",
+    "tailwindcss": "^1.2.0",
     "typescript": "^3.8.3"
   }
 }
