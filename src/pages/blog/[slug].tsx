@@ -11,7 +11,7 @@ import getBlogIndex from '../../lib/notion/getBlogIndex'
 import { getDateStr } from '../../lib/blog-helpers'
 
 // Get the data for each blog post
-export async function unstable_getStaticProps({
+export async function getStaticProps({
   params: { slug },
 }: {
   params: { slug: string }
@@ -44,12 +44,12 @@ export async function unstable_getStaticProps({
 }
 
 // Return our list of blog posts to prerender
-export async function unstable_getStaticPaths() {
+export async function getStaticPaths() {
   const postsTable = await getBlogIndex()
   const paths = Object.keys(postsTable).map(slug => {
     return { params: { slug } }
   })
-  return { paths }
+  return { paths, fallback: false }
 }
 
 const listTypes = new Set(['bulleted_list', 'numbered_list'])
