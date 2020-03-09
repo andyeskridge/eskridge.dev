@@ -8,7 +8,7 @@ import { textBlock } from '../../lib/notion/renderers'
 import getPageData from '../../lib/notion/getPageData'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
-import { getBlogLink, getDateStr } from '../../lib/blog-helpers'
+import { getDateStr } from '../../lib/blog-helpers'
 
 // Get the data for each blog post
 export async function unstable_getStaticProps({
