@@ -20,15 +20,6 @@ export async function getStaticProps({
   const postsTable = await getBlogIndex()
   const post = postsTable[slug]
 
-  if (!post) {
-    console.log(`Failed to find post for slug: ${slug}`)
-    return {
-      props: {
-        redirect: '/blog',
-      },
-      revalidate: 5,
-    }
-  }
   const postData = await getPageData(post.id)
   post.content = postData.blocks
 
@@ -54,7 +45,7 @@ export async function getStaticPaths() {
 
 const listTypes = new Set(['bulleted_list', 'numbered_list'])
 
-const RenderPost = ({ post, redirect }) => {
+const RenderPost = ({ post }) => {
   let listTagName: string | null = null
   let listLastId: string | null = null
   let listMap: {
@@ -66,16 +57,6 @@ const RenderPost = ({ post, redirect }) => {
     }
   } = {}
 
-  if (redirect) {
-    return (
-      <>
-        <Head>
-          <meta name="robots" content="noindex" />
-          <meta httpEquiv="refresh" content={`0;url=${redirect}`} />
-        </Head>
-      </>
-    )
-  }
   if (!post) {
     return null
   }
