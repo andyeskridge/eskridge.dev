@@ -11,5 +11,4 @@ export default {
   a: ExtLink,
 
   Code: dynamic(() => import('./code')),
-  Counter: dynamic(() => import('./counter')),
 }
