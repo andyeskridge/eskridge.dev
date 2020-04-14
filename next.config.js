@@ -19,7 +19,7 @@ try {
 const warnOrError =
   process.env.NODE_ENV !== 'production'
     ? console.warn
-    : msg => {
+    : (msg) => {
         throw new Error(msg)
       }
 

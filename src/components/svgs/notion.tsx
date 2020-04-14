@@ -1,4 +1,4 @@
-export default props => (
+export default (props) => (
   <svg
     viewBox="-5 0 120 130"
     className="prefix__notionLogo"
