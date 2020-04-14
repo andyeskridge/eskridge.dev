@@ -5,7 +5,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { textBlock } from './notion/renderers'
 import getBlogIndex from './notion/getBlogIndex'
 import getNotionUsers from './notion/getNotionUsers'
-import { postIsReady, getBlogLink } from './blog-helpers'
+import { postIsPublished, getBlogLink } from './blog-helpers'
 
 // must use weird syntax to bypass auto replacing of NODE_ENV
 process.env['NODE' + '_ENV'] = 'production'
@@ -75,9 +75,9 @@ async function main() {
   const neededAuthors = new Set<string>()
 
   const blogPosts = Object.keys(postsTable)
-    .map(slug => {
+    .map((slug) => {
       const post = postsTable[slug]
-      if (!postIsReady(post)) return
+      if (!postIsPublished(post)) return
 
       post.authors = post.Authors || []
 
@@ -90,8 +90,8 @@ async function main() {
 
   const { users } = await getNotionUsers([...neededAuthors])
 
-  blogPosts.forEach(post => {
-    post.authors = post.authors.map(id => users[id])
+  blogPosts.forEach((post) => {
+    post.authors = post.authors.map((id) => users[id])
     post.link = getBlogLink(post.Slug)
     post.title = post.Page
     post.date = post.Date
@@ -102,4 +102,4 @@ async function main() {
   console.log(`Atom feed file generated at \`${outputPath}\``)
 }
 
-main().catch(error => console.error(error))
+main().catch((error) => console.error(error))

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../../components/header'
 import Heading from '../../components/heading'
 import components from '../../components/dynamic'
@@ -7,27 +7,43 @@ import { textBlock } from '../../lib/notion/renderers'
 import getPageData from '../../lib/notion/getPageData'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
-import { getDateStr } from '../../lib/blog-helpers'
+import { getDateStr, getBlogLink } from '../../lib/blog-helpers'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 // Get the data for each blog post
 export async function getStaticProps({
   params: { slug },
+  preview,
 }: {
   params: { slug: string }
+  preview: boolean
 }) {
   // load the postsTable so that we can get the page's ID
   const postsTable = await getBlogIndex()
   const post = postsTable[slug]
 
+  if (!post || (post.Published !== 'Yes' && !preview)) {
+    console.log(`Failed to find post for slug: ${slug}`)
+    return {
+      props: {
+        redirect: '/blog',
+        preview: false,
+      },
+      revalidate: 5,
+    }
+  }
+
   const postData = await getPageData(post.id)
   post.content = postData.blocks
 
   const { users } = await getNotionUsers(post.Authors || [])
-  post.Authors = Object.keys(users).map(id => users[id].full_name)
+  post.Authors = Object.keys(users).map((id) => users[id].full_name)
 
   return {
     props: {
       post,
+      preview: preview || false,
     },
     revalidate: 10,
   }
@@ -36,15 +52,19 @@ export async function getStaticProps({
 // Return our list of blog posts to prerender
 export async function getStaticPaths() {
   const postsTable = await getBlogIndex()
-  const paths = Object.keys(postsTable).map(slug => {
-    return { params: { slug } }
-  })
-  return { paths, fallback: false }
+  // we fallback for any unpublished posts to save build time for actually published ones
+  return {
+    paths: Object.keys(postsTable)
+      .filter((post) => postsTable[post].Published === 'Yes')
+      .map((slug) => getBlogLink(slug)),
+    fallback: true,
+  }
 }
 
 const listTypes = new Set(['bulleted_list', 'numbered_list'])
 
-const RenderPost = ({ post }) => {
+const RenderPost = ({ post, redirect, preview }) => {
+  const router = useRouter()
   let listTagName: string | null = null
   let listLastId: string | null = null
   let listMap: {
@@ -56,13 +76,64 @@ const RenderPost = ({ post }) => {
     }
   } = {}
 
+  useEffect(() => {
+    const twitterSrc = 'https://platform.twitter.com/widgets.js'
+    // make sure to initialize any new widgets loading on
+    // client navigation
+    if (post && post.hasTweet) {
+      if ((window as any)?.twttr?.widgets) {
+        ;(window as any).twttr.widgets.load()
+      } else if (!document.querySelector(`script[src="${twitterSrc}"]`)) {
+        const script = document.createElement('script')
+        script.async = true
+        script.src = twitterSrc
+        document.querySelector('body').appendChild(script)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (redirect && !post) {
+      router.replace(redirect)
+    }
+  }, [redirect, post])
+
+  // If the page is not yet generated, this will be displayed
+  // initially until getStaticProps() finishes running
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
+
+  // if you don't have a post at this point, and are not
+  // loading one from fallback then  redirect back to the index
   if (!post) {
-    return null
+    return (
+      <div>
+        <p>
+          Woops! didn't find that post, redirecting you back to the blog index
+        </p>
+      </div>
+    )
   }
 
   return (
     <>
       <Header titlePre={post.Page} />
+
+      {preview && (
+        <div className="flex justify-center">
+          <div className="inline-flex items-center justify-between text-center border-red-600 w-48 p-8 rounded">
+            <b>Note:</b>
+            {` `}Viewing in preview mode{' '}
+            <Link href={`/api/clear-preview?slug=${post.Slug}`}>
+              <button className="flex flex-col items-center justify-center border-none bg-black text-white h-8 rounded hover:text-black hover:bg-white">
+                Exit Preview
+              </button>
+            </Link>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-screen-sm mx-auto my-0">
         <h1 className="text-3xl font-bold text-blue-400 mx-0">
           {post.Page || ''}
@@ -80,7 +151,7 @@ const RenderPost = ({ post }) => {
           <p>This post has no content</p>
         )}
 
-        {(post.content || []).map((block, blockIdx) => {
+        {(post.content || []).map((block, blockIdx: number) => {
           const { value } = block
           const { type, properties, id, parent_id } = value
           const isLast = blockIdx === post.content.length - 1
@@ -108,10 +179,10 @@ const RenderPost = ({ post }) => {
               React.createElement(
                 listTagName,
                 { key: listLastId! },
-                Object.keys(listMap).map(itemId => {
+                Object.keys(listMap).map((itemId) => {
                   if (listMap[itemId].isNested) return null
 
-                  const createEl = item =>
+                  const createEl = (item) =>
                     React.createElement(
                       components.li || 'ul',
                       { key: item.key },
@@ -120,7 +191,7 @@ const RenderPost = ({ post }) => {
                         ? React.createElement(
                             components.ul || 'ul',
                             { key: item + 'sub-list' },
-                            item.nested.map(nestedId =>
+                            item.nested.map((nestedId) =>
                               createEl(listMap[nestedId])
                             )
                           )
@@ -160,9 +231,11 @@ const RenderPost = ({ post }) => {
               const roundFactor = Math.pow(10, 2)
               // calculate percentages
               const width = block_width
-                ? `${Math.round(
-                    (block_width / baseBlockWidth) * 100 * roundFactor
-                  ) / roundFactor}%`
+                ? `${
+                    Math.round(
+                      (block_width / baseBlockWidth) * 100 * roundFactor
+                    ) / roundFactor
+                  }%`
                 : '100%'
 
               const isImage = type === 'image'
