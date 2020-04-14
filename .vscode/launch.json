@@ -2,27 +2,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
-      "request": "launch",
-      "name": "Next: Chrome",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}"
-    },
-    {
       "type": "node",
-      "request": "launch",
-      "name": "Next: Node",
-      "runtimeExecutable": "${workspaceFolder}/node_modules/next/dist/bin/next",
+      "request": "attach",
+      "name": "Attach",
       "port": 9229,
-      "console": "internalConsole",
-      "skipFiles": ["<node_internals>/**"],
-      "env": { "NODE_OPTIONS": "--inspect", "DEV": "true" }
-    }
-  ],
-  "compounds": [
-    {
-      "name": "Next: Full",
-      "configurations": ["Next: Node", "Next: Chrome"]
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
