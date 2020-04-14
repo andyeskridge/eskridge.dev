@@ -4,7 +4,7 @@ import createTable from './createTable'
 import getTableData from './getTableData'
 import { getPostPreview } from './getPostPreview'
 import { readFile, writeFile } from '../fs-helpers'
-import { BLOG_INDEX_ID, BLOG_INDEX_CACHE } from './server-constants'
+import { BLOG_INDEX_ID, TABLE_ID, BLOG_INDEX_CACHE } from './server-constants'
 
 export default async function getBlogIndex(previews = true) {
   let postsTable: any = null
@@ -29,10 +29,7 @@ export default async function getBlogIndex(previews = true) {
         verticalColumns: false,
       })
 
-      // Parse table with posts
-      const tableBlock = values(data.recordMap.block).find(
-        (block: any) => block.value.type === 'collection_view'
-      )
+      const tableBlock = data.recordMap.block[TABLE_ID]
 
       postsTable = await getTableData(tableBlock, true)
     } catch (err) {
