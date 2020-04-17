@@ -1,22 +1,22 @@
-import Link from 'next/link'
-import Head from 'next/head'
-import ExtLink from './ext-link'
-import { useRouter } from 'next/router'
+import Link from "next/link";
+import Head from "next/head";
+import ExtLink from "./ext-link";
+import { useRouter } from "next/router";
 
 const navItems: { label: string; page?: string; link?: string }[] = [
-  { label: 'Home', page: '/' },
-  { label: 'Contact', page: '/contact' },
-]
+  { label: "Home", page: "/" },
+  { label: "Contact", page: "/contact" },
+];
 
-const ogImageUrl = 'https://notion-blog.now.sh/og-image.png'
+const ogImageUrl = "https://notion-blog.now.sh/og-image.png";
 
-export default ({ titlePre = '' }) => {
-  const { pathname } = useRouter()
+export default ({ titlePre = "" }) => {
+  const { pathname } = useRouter();
 
   return (
     <header className="block min-h-full p-8 text-center tracking-tighter">
       <Head>
-        <title>{titlePre ? `${titlePre} |` : ''} eskridge.dev</title>
+        <title>{titlePre ? `${titlePre} |` : ""} eskridge.dev</title>
         <meta
           name="description"
           content="An example Next.js site using Notion for the blog"
@@ -35,8 +35,8 @@ export default ({ titlePre = '' }) => {
                 <a
                   className={`text-xl ${
                     pathname === page
-                      ? 'font-semibold text-blue-600'
-                      : 'font-normal text-gray-500'
+                      ? "font-semibold text-blue-600"
+                      : "font-normal text-gray-500"
                   }`}
                 >
                   {label}
@@ -49,5 +49,5 @@ export default ({ titlePre = '' }) => {
         ))}
       </ul>
     </header>
-  )
-}
+  );
+};

@@ -1,4 +1,4 @@
-import rpc from './rpc'
+import rpc from "./rpc";
 
 export default function queryCollection({
   collectionId,
@@ -9,27 +9,27 @@ export default function queryCollection({
   const {
     limit = 999, // TODO: figure out Notion's way of handling pagination
     loadContentCover = true,
-    type = 'table',
-    userLocale = 'en',
-    userTimeZone = 'America/Phoenix',
-  } = loader
+    type = "table",
+    userLocale = "en",
+    userTimeZone = "America/Phoenix",
+  } = loader;
 
   const {
     aggregate = [
       {
-        aggregation_type: 'count',
-        id: 'count',
-        property: 'title',
-        type: 'title',
-        view_type: 'table',
+        aggregation_type: "count",
+        id: "count",
+        property: "title",
+        type: "title",
+        view_type: "table",
       },
     ],
     filter = [],
-    filter_operator = 'and',
+    filter_operator = "and",
     sort = [],
-  } = query
+  } = query;
 
-  return rpc('queryCollection', {
+  return rpc("queryCollection", {
     collectionId,
     collectionViewId,
     loader: {
@@ -45,5 +45,5 @@ export default function queryCollection({
       filter_operator,
       sort,
     },
-  })
+  });
 }
