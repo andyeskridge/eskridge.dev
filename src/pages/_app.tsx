@@ -14,7 +14,7 @@ export default ({ Component, pageProps }: AppPropsType) => {
   // Initialize Fathom when the app loads
   useEffect(() => {
     if (process.env.NODE_ENV === "production") {
-      Fathom.load("https://ecoonll.eskridge.dev/812ed4.js");
+      Fathom.load();
       Fathom.setSiteId("FNASISBH");
       Fathom.trackPageview();
     }
