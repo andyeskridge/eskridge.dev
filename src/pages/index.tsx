@@ -63,7 +63,10 @@ export default ({ posts = [], preview }) => {
         )}
         {posts.map((post) => {
           return (
-            <div className="max-w-screen-sm mx-auto my-3" key={post.Slug}>
+            <div
+              className="max-w-screen-sm mx-auto my-3 bg-card rounded-lg p-4"
+              key={post.Slug}
+            >
               <h3 className="text-3xl font-bold text-blue-400 cursor-pointer">
                 <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
                   <div className="inline-flex items-center justify-start">

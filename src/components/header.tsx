@@ -35,8 +35,8 @@ export default ({ titlePre = "" }) => {
                 <a
                   className={`text-xl ${
                     pathname === page
-                      ? "font-semibold text-blue-600"
-                      : "font-normal text-gray-500"
+                      ? "font-semibold text-blue-400"
+                      : "font-normal text-gray-100"
                   }`}
                 >
                   {label}

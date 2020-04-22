@@ -3,7 +3,8 @@ module.exports = {
     extend: {
       screens: { "dark-mode": { raw: "(prefers-color-scheme: dark)" } },
       colors: {
-        dark: "#282c35",
+        dark: "#0e141b",
+        card: "#182635",
       },
     },
   },
