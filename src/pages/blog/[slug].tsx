@@ -10,6 +10,7 @@ import getBlogIndex from "../../lib/notion/getBlogIndex";
 import { getDateStr, getBlogLink } from "../../lib/blog-helpers";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import tw from "twin.macro";
 
 // Get the data for each blog post
 export async function getStaticProps({
@@ -119,12 +120,12 @@ const RenderPost = ({ post, redirect, preview }) => {
       <Header titlePre={post.Page} />
 
       {preview && (
-        <div className="flex justify-center">
-          <div className="inline-flex items-center justify-between text-center border-red-600 w-48 p-8 rounded">
+        <div tw="flex justify-center">
+          <div tw="inline-flex items-center justify-between text-center border-red-600 w-48 p-8 rounded">
             <b>Note:</b>
             {` `}Viewing in preview mode{" "}
             <Link href={`/api/clear-preview?slug=${post.Slug}`}>
-              <button className="flex flex-col items-center justify-center border-none bg-black text-white h-8 rounded hover:text-black hover:bg-white">
+              <button tw="flex flex-col items-center justify-center border-none bg-black text-white h-8 rounded hover:text-black hover:bg-white">
                 Exit Preview
               </button>
             </Link>
@@ -132,18 +133,14 @@ const RenderPost = ({ post, redirect, preview }) => {
         </div>
       )}
 
-      <div className="max-w-screen-sm mx-auto my-0 bg-card rounded-lg p-4">
-        <h1 className="text-3xl font-bold text-blue-400 mx-0">
-          {post.Page || ""}
-        </h1>
+      <div tw="max-w-screen-sm mx-auto my-0 bg-card rounded-lg p-4">
+        <h1 tw="text-3xl font-bold text-blue-400 mx-0">{post.Page || ""}</h1>
         {post.Authors.length > 0 && (
-          <div className="text-sm">By: {post.Authors.join(" ")}</div>
+          <div tw="text-sm">By: {post.Authors.join(" ")}</div>
         )}
-        {post.Date && (
-          <div className="text-sm">Posted: {getDateStr(post.Date)}</div>
-        )}
+        {post.Date && <div tw="text-sm">Posted: {getDateStr(post.Date)}</div>}
 
-        <hr className="my-4" />
+        <hr tw="my-4" />
 
         {(!post.content || post.content.length === 0) && (
           <p>This post has no content</p>
@@ -237,23 +234,32 @@ const RenderPost = ({ post, redirect, preview }) => {
                 : "100%";
 
               const isImage = type === "image";
-              const Comp = isImage ? "img" : "video";
-
-              toRender.push(
-                <Comp
+              const Comp = isImage ? (
+                <img
                   key={id}
                   src={`/api/asset?assetUrl=${encodeURIComponent(
                     format.display_source as any
                   )}&blockId=${id}`}
-                  controls={!isImage}
                   alt={isImage ? "An image from Notion" : undefined}
-                  loop={!isImage}
-                  muted={!isImage}
-                  autoPlay={!isImage}
                   style={{ width }}
-                  className="mx-8 my-auto shadow-md max-w-full block"
+                  tw="mx-8 my-auto shadow-md max-w-full block"
+                />
+              ) : (
+                <video
+                  key={id}
+                  src={`/api/asset?assetUrl=${encodeURIComponent(
+                    format.display_source as any
+                  )}&blockId=${id}`}
+                  controls
+                  loop
+                  muted
+                  autoPlay
+                  style={{ width }}
+                  tw="mx-8 my-auto shadow-md max-w-full block"
                 />
               );
+
+              toRender.push(Comp);
               break;
             }
             case "header":

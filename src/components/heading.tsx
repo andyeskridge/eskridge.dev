@@ -1,3 +1,4 @@
+import tw from "twin.macro";
 const collectText = (el, acc = []) => {
   if (el) {
     if (typeof el === "string") acc.push(el);
@@ -6,6 +7,8 @@ const collectText = (el, acc = []) => {
   }
   return acc.join("").trim();
 };
+
+const StyledLink = tw.a`ml-12 mx-0 mr-6`;
 
 export default ({ children: component, id }: { children: any; id?: any }) => {
   const children = component.props.children || "";
@@ -19,13 +22,8 @@ export default ({ children: component, id }: { children: any; id?: any }) => {
   }
 
   return (
-    <a
-      className="ml-12 mx-0 mr-6"
-      href={`#${id}`}
-      id={id}
-      style={{ color: "inherit" }}
-    >
+    <StyledLink href={`#${id}`} id={id}>
       {component}
-    </a>
+    </StyledLink>
   );
 };

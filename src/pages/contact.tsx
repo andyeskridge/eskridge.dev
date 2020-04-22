@@ -1,6 +1,7 @@
 import Header from "../components/header";
 import ExtLink from "../components/ext-link";
 import * as Fathom from "fathom-client";
+import tw from "twin.macro";
 
 import GitHub from "../components/svgs/github";
 import Twitter from "../components/svgs/twitter";
@@ -43,20 +44,20 @@ export default () => {
     <>
       <Header titlePre="Contact" />
       <div>
-        <h1 className="text-4xl font-extrabold tracking-tighter text-center">
+        <h1 tw="text-4xl font-extrabold tracking-tighter text-center">
           Contact
         </h1>
 
-        <div className="text-center text-lg">
+        <div tw="text-center text-lg">
           Andy Eskridge - Director of Software Development @{" "}
           <ExtLink href="https://cenergistic.com">Cenergistic</ExtLink>
         </div>
 
-        <div className="text-center block mx-auto my-4">
+        <div tw="text-center block mx-auto my-4">
           {contacts.map(({ Comp, link, alt }) => {
             return (
               <ExtLink
-                className="w-4 h-4 inline-block mx-12 fill-current"
+                tw="w-4 h-4 inline-block mx-12 fill-current"
                 key={link}
                 href={link}
                 aria-label={alt}
