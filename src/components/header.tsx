@@ -14,7 +14,7 @@ export default ({ titlePre = "" }) => {
   const { pathname } = useRouter();
 
   return (
-    <header className="block min-h-full p-8 text-center tracking-tighter">
+    <header className="block min-h-full pt-2 pb-8 text-center tracking-tighter">
       <Head>
         <title>{titlePre ? `${titlePre} |` : ""} eskridge.dev</title>
         <meta
