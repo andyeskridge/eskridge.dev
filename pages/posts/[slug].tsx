@@ -5,13 +5,19 @@ import PostBody from "../../components/post-body";
 import Header from "../../components/header";
 import PostHeader from "../../components/post-header";
 import Layout from "../../components/layout";
-import { getPostBySlug, getAllPosts } from "../../lib/api";
+import { getPostBySlug, getAllPosts, Post as PostType } from "../../lib/api";
 import PostTitle from "../../components/post-title";
 import Head from "next/head";
 import { CMS_NAME } from "../../lib/constants";
 import markdownToHtml from "../../lib/markdownToHtml";
 
-export default function Post({ post, morePosts, preview }) {
+export default function Post({
+  post,
+  preview,
+}: {
+  post: PostType;
+  preview: boolean;
+}) {
   const router = useRouter();
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;

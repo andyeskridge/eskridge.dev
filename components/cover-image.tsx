@@ -1,7 +1,7 @@
 import cn from "classnames";
 import Link from "next/link";
 
-export default function CoverImage({ title, src, slug }) {
+export default function CoverImage({ title, src, slug = undefined }) {
   const image = (
     <img
       src={src}
