@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "../styles/index.css";
+import "../styles/dracula.css";
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
