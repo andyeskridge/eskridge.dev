@@ -12,8 +12,8 @@ export interface Post {
   slug?: string;
   content?: string;
   title?: string;
-  date?: Date;
-  author?: string;
+  date?: string;
+  author?: { name: string; picture: string };
   ogImage?: { url: string };
   coverImage?: string;
   excerpt?: string;

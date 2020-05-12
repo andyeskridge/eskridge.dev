@@ -14,7 +14,7 @@ export default function Index({ allPosts }: { allPosts: Post[] }) {
     <>
       <Layout>
         <Head>
-          <title>Next.js Blog Example with {CMS_NAME}</title>
+          <title>eskridge.dev</title>
         </Head>
         <Container>
           <Intro />
