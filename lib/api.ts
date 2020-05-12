@@ -15,7 +15,7 @@ export interface Post {
   date?: string;
   author?: { name: string; picture: string };
   ogImage?: { url: string };
-  coverImage?: string;
+  coverImage?: { url: string; credit: string };
   excerpt?: string;
 }
 

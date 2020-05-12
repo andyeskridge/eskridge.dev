@@ -1,7 +1,12 @@
 import cn from "classnames";
 import Link from "next/link";
 
-export default function CoverImage({ title, src, slug = undefined }) {
+export default function CoverImage({
+  title,
+  src,
+  slug = undefined,
+  credit = undefined,
+}) {
   const image = (
     <img
       src={src}
@@ -20,6 +25,7 @@ export default function CoverImage({ title, src, slug = undefined }) {
       ) : (
         image
       )}
+      {credit ? <span className="text-xs text-gray-500">{credit}</span> : null}
     </div>
   );
 }
