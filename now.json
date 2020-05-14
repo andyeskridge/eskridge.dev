@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "src": "/_next/static/images/(.*)",
+      "headers": { "cache-control": "s-maxage=604800" },
+      "dest": "/_next/static/images/$1"
+    }
+  ]
+}
