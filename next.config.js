@@ -10,7 +10,7 @@ module.exports = withMDX(
     inlineImageLimit: 8192,
     imagesFolder: "images",
     imagesName: "[name]-[hash].[ext]",
-    handleImages: ["jpeg", "png", "svg", "webp", "gif"],
+    handleImages: ["jpeg", "jpg", "png", "svg", "webp", "gif"],
     optimizeImages: true,
     optimizeImagesInDev: true,
     mozjpeg: {
