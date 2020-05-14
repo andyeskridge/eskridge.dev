@@ -7,27 +7,41 @@
     "start": "next start"
   },
   "dependencies": {
+    "@mdx-js/loader": "^1.6.1",
+    "@next/mdx": "^9.4.0",
     "classnames": "2.2.6",
     "date-fns": "2.13.0",
     "gray-matter": "4.0.2",
+    "image-trace-loader": "^1.0.2",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-optipng": "^7.1.0",
+    "imagemin-svgo": "^7.1.0",
     "isomorphic-unfetch": "3.0.0",
+    "jimp": "^0.10.3",
+    "lqip-loader": "^2.2.0",
     "next": "latest",
+    "next-optimized-images": "^2.6.0",
+    "prism-react-renderer": "^1.1.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-live": "^2.2.2",
     "rehype-stringify": "^7.0.0",
     "remark-highlight.js": "^6.0.0",
     "remark-parse": "^8.0.2",
     "remark-rehype": "^6.0.0",
-    "unified": "^9.0.0"
+    "responsive-loader": "^1.2.0",
+    "svg-sprite-loader": "^5.0.0",
+    "unified": "^9.0.0",
+    "webp-loader": "^0.6.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",
-    "@types/node": "^13.13.5",
+    "@types/node": "^14.0.1",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
     "dotenv": "8.2.0",
     "postcss-preset-env": "^6.7.0",
     "tailwindcss": "^1.4.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.2"
   }
 }

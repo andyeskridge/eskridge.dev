@@ -8,13 +8,25 @@ export default function CoverImage({
   credit = undefined,
 }) {
   const image = (
-    <img
-      src={src}
-      alt={`Cover Image for ${title}`}
-      className={cn("shadow-small", {
-        "hover:shadow-medium transition-shadow duration-200": slug,
-      })}
-    />
+    <div className="relative">
+      <img
+        className={cn("shadow-small", {
+          "hover:shadow-medium transition-shadow duration-200": slug,
+        })}
+        src={require(`../images/${src}?trace`).trace}
+      />
+      <img
+        className={cn("shadow-small absolute top-0 left-0", {
+          "hover:shadow-medium transition-shadow duration-200": slug,
+        })}
+        srcSet={
+          require(`../images/${src}?resize&sizes[]=600&sizes[]=728&sizes[]=984&sizes[]=1240`)
+            .srcSet
+        }
+        sizes="(max-width: 640px) 600px, (max-width: 768px) 728px, (max-width: 1024px) 984px, 1240px,"
+        loading="lazy"
+      />
+    </div>
   );
   return (
     <div className="-mx-5 sm:mx-0">
@@ -25,7 +37,7 @@ export default function CoverImage({
       ) : (
         image
       )}
-      {credit ? <span className="text-xs text-gray-500">{credit}</span> : null}
+      {credit ? <span className="text-xs text-gray-600">{credit}</span> : null}
     </div>
   );
 }

@@ -1,50 +1,24 @@
 import fs from "fs";
 import { join } from "path";
-import matter from "gray-matter";
 
-const postsDirectory = join(process.cwd(), "_posts");
+export const getAllPosts = () => {
+  const DIR = join(process.cwd(), "./pages/posts/");
+  const files = fs
+    .readdirSync(DIR)
+    .filter((file) => file.endsWith(".md") || file.endsWith(".mdx"));
+  return files.map((file) => {
+    const META = /export\s+const\s+meta\s+=\s+(\{(\n|[^])*?\n\})/;
+    const name = join(DIR, file);
+    const contents = fs.readFileSync(name, "utf8");
+    const match = META.exec(contents);
+    if (!match || typeof match[1] !== "string")
+      throw new Error(`${name} needs to export const meta = {}`);
 
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
-}
+    const meta = eval("(" + match[1] + ")");
 
-export interface Post {
-  slug?: string;
-  content?: string;
-  title?: string;
-  date?: string;
-  author?: { name: string; picture: string };
-  ogImage?: { url: string };
-  coverImage?: { url: string; credit: string };
-  excerpt?: string;
-}
-
-export function getPostBySlug(slug: string, fields: string[] = []) {
-  const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = join(postsDirectory, `${realSlug}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
-
-  const items: Post = {};
-
-  // Ensure only the minimal needed data is exposed
-  fields.forEach((field) => {
-    if (field === "slug") {
-      items[field] = realSlug;
-    }
-    if (field === "content") {
-      items[field] = content;
-    }
-
-    if (data[field]) {
-      items[field] = data[field];
-    }
+    return {
+      ...meta,
+      path: "/posts/" + file.replace(/\.mdx?$/, ""),
+    };
   });
-
-  return items;
-}
-
-export function getAllPosts(fields: (keyof Post)[]) {
-  const slugs = getPostSlugs();
-  return slugs.map((slug) => getPostBySlug(slug, fields));
-}
+};
