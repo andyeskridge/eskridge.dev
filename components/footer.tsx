@@ -25,6 +25,7 @@ export default function Footer() {
               rel="noopener"
               target="_blank"
               onClick={(_) => logClick("T8D9ZCPC")}
+              aria-label="Twitter"
             >
               <Twitter height={32} />
             </a>
@@ -34,6 +35,7 @@ export default function Footer() {
               rel="noopener"
               target="_blank"
               onClick={(_) => logClick("QZGXQUVM")}
+              aria-label="Github"
             >
               <Github height={32} />
             </a>
@@ -43,6 +45,7 @@ export default function Footer() {
               rel="noopener"
               target="_blank"
               onClick={(_) => logClick("H47AD885")}
+              aria-label="Linkedin"
             >
               <Linkedin height={32} />
             </a>
@@ -52,6 +55,7 @@ export default function Footer() {
               rel="noopener"
               target="_blank"
               onClick={(_) => logClick("0XBSIPJP")}
+              aria-label="Email"
             >
               <Envelope height={32} />
             </a>

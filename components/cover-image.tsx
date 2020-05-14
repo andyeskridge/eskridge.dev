@@ -14,6 +14,7 @@ export default function CoverImage({
           "hover:shadow-medium transition-shadow duration-200": slug,
         })}
         src={require(`../images/${src}?trace`).trace}
+        alt={`SVG trace of ${title}`}
       />
       <img
         className={cn("shadow-small absolute top-0 left-0", {
@@ -25,6 +26,7 @@ export default function CoverImage({
         }
         sizes="(max-width: 640px) 600px, (max-width: 768px) 728px, (max-width: 1024px) 984px, 1240px,"
         loading="lazy"
+        alt={title}
       />
     </div>
   );
