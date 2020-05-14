@@ -8,13 +8,20 @@ export default function CoverImage({
   credit = undefined,
 }) {
   const image = (
-    <img
-      srcSet={require(`../images/${src}?resize`)}
-      alt={`Cover Image for ${title}`}
-      className={cn("shadow-small", {
-        "hover:shadow-medium transition-shadow duration-200": slug,
-      })}
-    />
+    <div className="relative">
+      <img
+        className={cn("shadow-small", {
+          "hover:shadow-medium transition-shadow duration-200": slug,
+        })}
+        src={require(`../images/${src}?trace`).trace}
+      />
+      <img
+        className={cn("shadow-small absolute top-0 left-0", {
+          "hover:shadow-medium transition-shadow duration-200": slug,
+        })}
+        src={require(`../images/${src}?webp`)}
+      />
+    </div>
   );
   return (
     <div className="-mx-5 sm:mx-0">
