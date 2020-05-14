@@ -19,7 +19,11 @@ export default function CoverImage({
         className={cn("shadow-small absolute top-0 left-0", {
           "hover:shadow-medium transition-shadow duration-200": slug,
         })}
-        src={require(`../images/${src}?webp`)}
+        srcSet={
+          require(`../images/${src}?resize&sizes[]=640&sizes[]=768&sizes[]=1024&sizes[]=1280`)
+            .srcSet
+        }
+        sizes="(max-width: 640px) 640px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, 1280px,"
         loading="lazy"
       />
     </div>
@@ -33,7 +37,7 @@ export default function CoverImage({
       ) : (
         image
       )}
-      {credit ? <span className="text-xs text-gray-500">{credit}</span> : null}
+      {credit ? <span className="text-xs text-gray-600">{credit}</span> : null}
     </div>
   );
 }
