@@ -20,10 +20,10 @@ export default function CoverImage({
           "hover:shadow-medium transition-shadow duration-200": slug,
         })}
         srcSet={
-          require(`../images/${src}?resize&sizes[]=640&sizes[]=768&sizes[]=1024&sizes[]=1280`)
+          require(`../images/${src}?resize&sizes[]=600&sizes[]=728&sizes[]=984&sizes[]=1240`)
             .srcSet
         }
-        sizes="(max-width: 640px) 640px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, 1280px,"
+        sizes="(max-width: 640px) 600px, (max-width: 768px) 728px, (max-width: 1024px) 984px, 1240px,"
         loading="lazy"
       />
     </div>
