@@ -20,6 +20,7 @@ export default function CoverImage({
           "hover:shadow-medium transition-shadow duration-200": slug,
         })}
         src={require(`../images/${src}?webp`)}
+        loading="lazy"
       />
     </div>
   );

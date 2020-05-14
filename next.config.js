@@ -31,8 +31,5 @@ module.exports = withMDX(
       preset: "default",
       quality: 75,
     },
-    responsive: {
-      sizes: [300, 600, 1200, 2000],
-    },
   })
 );
