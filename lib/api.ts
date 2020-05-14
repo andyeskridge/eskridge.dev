@@ -46,5 +46,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 
 export function getAllPosts(fields: (keyof Post)[]) {
   const slugs = getPostSlugs();
-  return slugs.map((slug) => getPostBySlug(slug, fields));
+  return slugs
+    .filter((slug) => slug.endsWith(".md"))
+    .map((slug) => getPostBySlug(slug, fields));
 }

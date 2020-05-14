@@ -2,7 +2,7 @@
 title: "Importance of metrics"
 excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus."
 coverImage:
-  url: "/assets/blog/importance-of-121s/hero.jpg"
+  url: "importance-of-121s-hero.jpg"
   credit: "Photo by Charles Deluvio on Unsplash"
 date: "2020-05-01T05:35:07.322Z"
 author:
