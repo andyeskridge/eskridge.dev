@@ -9,7 +9,7 @@ export default function CoverImage({
 }) {
   const image = (
     <img
-      src={src}
+      src={require(`../images/${src}`)}
       alt={`Cover Image for ${title}`}
       className={cn("shadow-small", {
         "hover:shadow-medium transition-shadow duration-200": slug,

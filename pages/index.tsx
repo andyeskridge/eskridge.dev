@@ -3,10 +3,10 @@ import MoreStories from "../components/more-stories";
 import HeroPost from "../components/hero-post";
 import Intro from "../components/intro";
 import Layout from "../components/layout";
-import { getAllPosts, Post } from "../lib/api";
+import { getAllPosts } from "../lib/api";
 import Head from "next/head";
 
-export default function Index({ allPosts }: { allPosts: Post[] }) {
+export default function Index({ allPosts }: { allPosts: any[] }) {
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
   return (
@@ -35,14 +35,7 @@ export default function Index({ allPosts }: { allPosts: Post[] }) {
 }
 
 export async function getStaticProps() {
-  const allPosts = getAllPosts([
-    "title",
-    "date",
-    "slug",
-    "author",
-    "coverImage",
-    "excerpt",
-  ]);
+  const allPosts = getAllPosts();
 
   return {
     props: { allPosts },
