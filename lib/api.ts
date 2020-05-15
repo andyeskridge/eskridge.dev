@@ -1,11 +1,12 @@
 import fs from "fs";
 import { join } from "path";
 
+const DIR = join(process.cwd(), "./pages/posts/");
+const files = fs
+  .readdirSync(DIR)
+  .filter((file) => file.endsWith(".md") || file.endsWith(".mdx"));
+
 export const getAllPosts = () => {
-  const DIR = join(process.cwd(), "./pages/posts/");
-  const files = fs
-    .readdirSync(DIR)
-    .filter((file) => file.endsWith(".md") || file.endsWith(".mdx"));
   return files.map((file) => {
     const META = /export\s+const\s+meta\s+=\s+(\{(\n|[^])*?\n\})/;
     const name = join(DIR, file);
