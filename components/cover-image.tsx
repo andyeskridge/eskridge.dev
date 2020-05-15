@@ -13,7 +13,7 @@ export default function CoverImage({
         className={cn("shadow-small", {
           "hover:shadow-medium transition-shadow duration-200": slug,
         })}
-        src={require(`../images/${src}?trace`).trace}
+        src={require(`images/${src}?trace`).trace}
         alt={`SVG trace of ${title}`}
       />
       <img
@@ -21,7 +21,7 @@ export default function CoverImage({
           "hover:shadow-medium transition-shadow duration-200": slug,
         })}
         srcSet={
-          require(`../images/${src}?resize&sizes[]=600&sizes[]=728&sizes[]=984&sizes[]=1240`)
+          require(`images/${src}?resize&sizes[]=600&sizes[]=728&sizes[]=984&sizes[]=1240`)
             .srcSet
         }
         sizes="(max-width: 640px) 600px, (max-width: 768px) 728px, (max-width: 1024px) 984px, 1240px,"
