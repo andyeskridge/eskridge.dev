@@ -46,7 +46,7 @@ export default ({ children, className, live, render }) => {
   }
 
   return (
-    <div className="rounded-lg">
+    <div className="overflow-hidden rounded-lg">
       <Highlight
         {...defaultProps}
         code={children}
