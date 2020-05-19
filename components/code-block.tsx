@@ -32,8 +32,13 @@ export default ({ children, className, live, render }) => {
 
   if (render) {
     return (
-      <div style={{ marginTop: "40px" }}>
-        <LiveProvider code={children}>
+      <div className="overflow-hidden rounded-lg">
+        <LiveProvider
+          code={children}
+          transformCode={(code) => "/** @jsx mdx */" + `<>${code}</>`}
+          scope={{ mdx }}
+          theme={theme}
+        >
           <LivePreview />
         </LiveProvider>
       </div>
@@ -41,18 +46,25 @@ export default ({ children, className, live, render }) => {
   }
 
   return (
-    <Highlight {...defaultProps} code={children} language={language}>
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre className={className} style={{ ...style, padding: "20px" }}>
-          {tokens.map((line, i) => (
-            <div key={i} {...getLineProps({ line, key: i })}>
-              {line.map((token, key) => (
-                <span key={key} {...getTokenProps({ token, key })} />
-              ))}
-            </div>
-          ))}
-        </pre>
-      )}
-    </Highlight>
+    <div className="rounded-lg">
+      <Highlight
+        {...defaultProps}
+        code={children}
+        language={language}
+        theme={theme}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre className={className} style={{ ...style, padding: "20px" }}>
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line, key: i })}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    </div>
   );
 };
