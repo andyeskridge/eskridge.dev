@@ -26,6 +26,7 @@
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
     "image-trace-loader": "^1.0.2",
+    "imagemin-mozjpeg": "^8.0.0",
     "postcss-preset-env": "^6.7.0",
     "responsive-loader": "^1.2.0",
     "sharp": "^0.25.3",
