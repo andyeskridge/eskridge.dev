@@ -7,6 +7,32 @@
 /* Stop purging. */
 
 /* Write you own custom component styles here */
+@responsive {
+  .height-300 {
+    height: 300px;
+  }
+  .height-320 {
+    height: 320px;
+  }
+  .height-364 {
+    height: 364px;
+  }
+  .height-166 {
+    height: 166px;
+  }
+  .height-492 {
+    height: 492px;
+  }
+  .height-214 {
+    height: 214px;
+  }
+  .height-278 {
+    height: 278px;
+  }
+  .height-620 {
+    height: 620px;
+  }
+}
 
 /* Start purging... */
 @tailwind utilities;
