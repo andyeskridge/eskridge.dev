@@ -6,7 +6,7 @@ import { mdx } from "@mdx-js/react";
 import theme from "prism-react-renderer/themes/vsDark";
 
 export default ({ children, className, live, render }) => {
-  const language = className.replace(/language-/, "");
+  const language = className?.replace(/language-/, "");
   if (live) {
     return (
       <div className="overflow-hidden rounded-lg">
