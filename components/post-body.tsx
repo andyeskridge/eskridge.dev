@@ -3,9 +3,9 @@ import codeBlock from "./code-block";
 import inlineCodeBlock from "./inline-code-block";
 
 const components = {
-  p: (props) => <p className="my-6" {...props} />,
-  ul: (props) => <ul className="my-6" {...props} />,
-  ol: (props) => <ol className="my-6" {...props} />,
+  p: (props) => <p className="my-2" {...props} />,
+  ul: (props) => <ul className="my-2" {...props} />,
+  ol: (props) => <ol className="my-2" {...props} />,
   blockquote: (props) => <blockquote className="my-6" {...props} />,
   a: (props) => <a className="underline hover:text-blue-500" {...props} />,
   h1: (props) => <h1 className="text-4xl mt-16 mb-4 leading-snug" {...props} />,
