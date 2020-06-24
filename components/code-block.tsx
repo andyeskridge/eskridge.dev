@@ -46,7 +46,7 @@ export default ({ children, className, live, render }) => {
   }
 
   return (
-    <div className="overflow-hidden rounded-lg">
+    <div className="overflow-x-auto rounded-lg">
       <Highlight
         {...defaultProps}
         code={children.trim()}
@@ -54,7 +54,10 @@ export default ({ children, className, live, render }) => {
         theme={theme}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={className} style={{ ...style, padding: "20px" }}>
+          <pre
+            className={`${className} overflow-x-auto`}
+            style={{ ...style, padding: "20px" }}
+          >
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({ line, key: i })}>
                 {line.map((token, key) => (

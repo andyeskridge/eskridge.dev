@@ -8,7 +8,7 @@ export default ({ children }) => {
   const language = "jsx";
 
   return (
-    <div className="inline-block relative text-center">
+    <div className="inline-block">
       <Highlight
         {...defaultProps}
         code={children.trim()}
@@ -16,7 +16,10 @@ export default ({ children }) => {
         theme={theme}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={`${className} rounded-lg px-1`} style={{ ...style }}>
+          <pre
+            className={`${className} relative text-center rounded-lg px-1`}
+            style={{ ...style }}
+          >
             {tokens.map((line, i) => (
               <span key={i} {...getLineProps({ line, key: i })}>
                 {line.map((token, key) => (

@@ -1,4 +1,5 @@
 import BlogPost from "components/blog-post.tsx";
+import Footer from "components/footer.tsx";
 
 export const meta = {
   title: "New Blog",
@@ -21,25 +22,55 @@ export default ({ children }) => <BlogPost meta={meta}>{children}</BlogPost>;
 
 After lots of time spent messing around, I've finally finished my blog and I'm very happy with it. Let me walk you through it.
 
+### Table of Contents
+
 ### Past Work
 
-My blog has gone through multiple unseen iterations. It has always been a fun side project for me where I've been able to experiment with new technologies. The issue with that is that I've never had the chance to actually finish a blog engine before writing a post! There was always a new technology that I wanted to try out. So to simplify, I've taken all of the crazy new technology out and am writing this post in markdown and delivering it via [Next.js](https://nextjs.org/) and [Vercel](https://vercel.com/).
+My blog has gone through multiple unseen iterations. It has always been a fun side project for me where I've been able to experiment with new technologies.
+The issue with that is that I've never had the chance to actually finish a blog engine before writing a post! There was always a new technology that I wanted
+to try out. So to simplify, I've taken all of the crazy new technology out and am writing this post in markdown and delivering it via [Next.js](https://nextjs.org/)
+and [Vercel](https://vercel.com/).
 
 ### Tech Stack
 
-My tech stack has simplified alot, but there were still some fun toys for me to play with while setting up this blog. The basis of the blog comes from the Next.js [blog starter](https://github.com/zeit/next.js/tree/canary/examples/blog-starter). This was a great start and allowed me to focus on getting up and running without spending too much time on the basics. I did spend some time adding some improvements to the starter that I go over below. I'm hosting the site on [Vercel](https://vercel.com/) which has been great for ease of deployment. The starter is using [TailwindCSS](https://tailwindcss.com/) for all of the styling. This is my first real chance to use TailwindCSS and it has been great so far. I really like the utility based rules, they really seem to help keep things consistent for me.
+My tech stack has simplified alot, but there were still some fun toys for me to play with while setting up this blog. The basis of the blog comes from
+the Next.js [blog starter](https://github.com/zeit/next.js/tree/canary/examples/blog-starter). This was a great start and allowed me to focus on getting
+up and running without spending too much time on the basics. I did spend some time adding some improvements to the starter that I go over below. I'm
+hosting the site on [Vercel](https://vercel.com/) which has been great for ease of deployment. The starter is using [TailwindCSS](https://tailwindcss.com/)
+for all of the styling. This is my first real chance to use TailwindCSS and it has been great so far. I really like the utility based rules, they really seem
+to help keep things consistent for me.
 
 ### Improvements
 
-One of the first changes I did was switch from regular markdown to [MDX](https://mdxjs.com/).
+#### MDX
+
+One of the first changes I did was switch from regular markdown to [MDX](https://mdxjs.com/). This allows embedding regular components right into my post.
+Below you can see the footer of my website embedded directly into this post. All that was required was importing the component!
+
+<Footer />
 
 ```jsx
-# Hello, _world_!
+<Footer />
+```
 
-Below is an example of JSX embedded in Markdown. <br />
-**Try and change the background color!**
+#### Images
 
-<div style={{ padding: "20px", backgroundColor: "tomato" }}>
-  <h3>This is JSX</h3>
-</div>
+I'm a sucker for shooting for high scores and my Lighthouse score was suffering because I was sending images that were too large down the wire. The fix for this was to
+resize the images and use a `srcset` to allow the browser to select the correct image size to download. To handle the resizing of images I am using the fantastic
+[next-optimized-images](https://github.com/cyrilwanner/next-optimized-images) plugin for Next.js. The `optimized-images` plugin provides me with the ability to not worry
+about trying to optimize the images manually. I just plop the high quality image into a directory and `require` the image. I'm then able to send the specific sizes I want
+to the loader by passing `?resize` and `sizes[]=600` to the `require` call. The plugin takes care of creating the different sizes at build time. Below is an example of an
+`img` that generates 4 different sizes and will request the correct one at the given max-width setting.
+
+```jsx
+<img
+  srcSet={
+    require(`image.jpg?resize&sizes[]=600&sizes[]=728&sizes[]=984&sizes[]=1240`)
+      .srcSet
+  }
+  sizes={
+    "(max-width: 640px) 600px, (max-width: 768px) 728px, (max-width: 1024px) 984px, 1240px"
+  }
+  alt={"A responsively loaded image!"}
+/>
 ```
