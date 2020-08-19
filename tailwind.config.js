@@ -1,5 +1,8 @@
 module.exports = {
   purge: ["./components/**/*.tsx", "./pages/**/*.tsx"],
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
   theme: {
     extend: {
       colors: {
