@@ -10,11 +10,7 @@ const components = {
 export default function PostBody({ children }) {
   return (
     <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-2xl mx-auto">
-      <MDXProvider components={components}>
-        <>
-          <div>{children}</div>
-        </>
-      </MDXProvider>
+      <MDXProvider components={components}>{children}</MDXProvider>
     </div>
   );
 }
