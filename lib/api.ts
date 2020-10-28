@@ -1,28 +1,47 @@
-import fs from "fs";
-import { join } from "path";
-import { parseISO, compareDesc } from "date-fns";
+import fs from 'fs'
+import { join } from 'path'
+import matter from 'gray-matter'
 
-const DIR = join(process.cwd(), "./pages/posts/");
-const files = fs
-  .readdirSync(DIR)
-  .filter((file) => file.endsWith(".md") || file.endsWith(".mdx"));
+const postsDirectory = join(process.cwd(), '_posts')
 
-export const getAllPosts = () => {
-  return files
-    .map((file) => {
-      const META = /export\s+const\s+meta\s+=\s+(\{(\n|[^])*?\n\})/;
-      const name = join(DIR, file);
-      const contents = fs.readFileSync(name, "utf8");
-      const match = META.exec(contents);
-      if (!match || typeof match[1] !== "string")
-        throw new Error(`${name} needs to export const meta = {}`);
+export function getPostSlugs() {
+  return fs.readdirSync(postsDirectory)
+}
 
-      const meta = eval("(" + match[1] + ")");
+export function getPostBySlug(slug: string, fields: string[] = []) {
+  const realSlug = slug.replace(/\.md$/, '')
+  const fullPath = join(postsDirectory, `${realSlug}.md`)
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const { data, content } = matter(fileContents)
 
-      return {
-        ...meta,
-        path: "/posts/" + file.replace(/\.mdx?$/, ""),
-      };
-    })
-    .sort((a, b) => compareDesc(parseISO(a.date), parseISO(b.date)));
-};
+  type Items = {
+    [key: string]: string
+  }
+
+  const items: Items = {}
+
+  // Ensure only the minimal needed data is exposed
+  fields.forEach((field) => {
+    if (field === 'slug') {
+      items[field] = realSlug
+    }
+    if (field === 'content') {
+      items[field] = content
+    }
+
+    if (data[field]) {
+      items[field] = data[field]
+    }
+  })
+
+  return items
+}
+
+export function getAllPosts(fields: string[] = []) {
+  const slugs = getPostSlugs()
+  const posts = slugs
+    .map((slug) => getPostBySlug(slug, fields))
+    // sort posts by date in descending order
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
+  return posts
+}

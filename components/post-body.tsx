@@ -1,16 +1,18 @@
-import { MDXProvider } from "@mdx-js/react";
-import codeBlock from "./code-block";
-import inlineCodeBlock from "./inline-code-block";
+import markdownStyles from './markdown-styles.module.css'
 
-const components = {
-  pre: (props) => <div {...props} />,
-  code: codeBlock,
-};
-
-export default function PostBody({ children }) {
-  return (
-    <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-2xl mx-auto">
-      <MDXProvider components={components}>{children}</MDXProvider>
-    </div>
-  );
+type Props = {
+  content: string
 }
+
+const PostBody = ({ content }: Props) => {
+  return (
+    <div className="max-w-2xl mx-auto">
+      <div
+        className={markdownStyles['markdown']}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    </div>
+  )
+}
+
+export default PostBody
