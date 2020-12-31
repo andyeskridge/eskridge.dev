@@ -1,30 +1,26 @@
-import Avatar from './avatar'
-import DateFormatter from './date-formatter'
+import Avatar from '../components/avatar'
+import DateFormatter from '../components/date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
-import Author from '../types/author'
 
-type Props = {
-  title: string
-  coverImage: string
-  date: string
-  excerpt: string
-  author: Author
-  slug: string
-}
-
-const PostPreview = ({
+export default function PostPreview({
   title,
   coverImage,
   date,
   excerpt,
   author,
   slug,
-}: Props) => {
+}) {
   return (
     <div>
       <div className="mb-5">
-        <CoverImage slug={slug} title={title} src={coverImage} />
+        <CoverImage
+          slug={slug}
+          title={title}
+          src={coverImage}
+          height={278}
+          width={556}
+        />
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
         <Link as={`/posts/${slug}`} href="/posts/[slug]">
@@ -39,5 +35,3 @@ const PostPreview = ({
     </div>
   )
 }
-
-export default PostPreview

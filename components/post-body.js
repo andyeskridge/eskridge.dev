@@ -1,10 +1,6 @@
 import markdownStyles from './markdown-styles.module.css'
 
-type Props = {
-  content: string
-}
-
-const PostBody = ({ content }: Props) => {
+export default function PostBody({ content }) {
   return (
     <div className="max-w-2xl mx-auto">
       <div
@@ -14,5 +10,3 @@ const PostBody = ({ content }: Props) => {
     </div>
   )
 }
-
-export default PostBody
