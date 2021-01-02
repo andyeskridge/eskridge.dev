@@ -5,7 +5,6 @@ import Intro from '../components/intro'
 import Layout from '../components/layout'
 import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
-import { CMS_NAME } from '../lib/constants'
 import PostType from '../types/post'
 
 export default function Index({ allPosts }: { allPosts: PostType[]}) {
@@ -15,7 +14,7 @@ export default function Index({ allPosts }: { allPosts: PostType[]}) {
     <>
       <Layout>
         <Head>
-          <title>Next.js Blog Example with {CMS_NAME}</title>
+          <title>eskridge.dev</title>
         </Head>
         <Container>
           <Intro />
