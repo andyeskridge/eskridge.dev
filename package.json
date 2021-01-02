@@ -17,7 +17,10 @@
     "remark-html": "13.0.1"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.11",
     "@types/node": "^14.14.17",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "autoprefixer": "10.0.4",
     "postcss": "8.1.10",
     "postcss-preset-env": "^6.7.0",

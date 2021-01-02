@@ -1,7 +1,8 @@
-import Avatar from '../components/avatar'
-import DateFormatter from '../components/date-formatter'
-import CoverImage from './cover-image'
-import Link from 'next/link'
+import Avatar from "./avatar";
+import DateFormatter from "./date-formatter";
+import CoverImage from "./cover-image";
+import Link from "next/link";
+import Author from "../types/author";
 
 export default function PostPreview({
   title,
@@ -10,6 +11,13 @@ export default function PostPreview({
   excerpt,
   author,
   slug,
+}: {
+  title: string;
+  coverImage: string;
+  date: string;
+  excerpt: string;
+  author: Author;
+  slug: string;
 }) {
   return (
     <div>
@@ -33,5 +41,5 @@ export default function PostPreview({
       <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
       <Avatar name={author.name} picture={author.picture} />
     </div>
-  )
+  );
 }

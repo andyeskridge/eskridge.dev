@@ -10,8 +10,9 @@ import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
+import PostType from '../../types/post'
 
-export default function Post({ post, morePosts, preview }) {
+export default function Post({ post, morePosts, preview }: { post: PostType, morePosts: PostType[], preview: boolean}) {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -46,7 +47,13 @@ export default function Post({ post, morePosts, preview }) {
   )
 }
 
-export async function getStaticProps({ params }) {
+type Params = {
+  params: {
+    slug: string
+  }
+}
+
+export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug, [
     'title',
     'date',

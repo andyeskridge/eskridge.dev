@@ -6,8 +6,9 @@ import Layout from '../components/layout'
 import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
+import PostType from '../types/post'
 
-export default function Index({ allPosts }) {
+export default function Index({ allPosts }: { allPosts: PostType[]}) {
   const heroPost = allPosts[0]
   const morePosts = allPosts.slice(1)
   return (
